@@ -12,6 +12,8 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		668062A2DD82882062938B38 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C708FAD916D185222EDBE95 /* Pods_iosApp.framework */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		8411BA682C2AA1D70056525F /* ImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411BA672C2AA1D70056525F /* ImageResource.swift */; };
+		8411BA6C2C2AA4CA0056525F /* ColorResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411BA6B2C2AA4CA0056525F /* ColorResource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8411BA672C2AA1D70056525F /* ImageResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResource.swift; sourceTree = "<group>"; };
+		8411BA6B2C2AA4CA0056525F /* ColorResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorResource.swift; sourceTree = "<group>"; };
 		FBE84A01C1ED6014A2417AFA /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,13 +71,95 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				8411BA6D2C2AA64B0056525F /* ui */,
+				8411BA662C2AA1A00056525F /* utils */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
-				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
 			path = iosApp;
+			sourceTree = "<group>";
+		};
+		8411BA662C2AA1A00056525F /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				8411BA6A2C2AA4A80056525F /* resources */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		8411BA6A2C2AA4A80056525F /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				8411BA672C2AA1D70056525F /* ImageResource.swift */,
+				8411BA6B2C2AA4CA0056525F /* ColorResource.swift */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		8411BA6D2C2AA64B0056525F /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				8411BA712C2AA83B0056525F /* auth */,
+				8411BA702C2AA82E0056525F /* account */,
+				8411BA6F2C2AA8250056525F /* schedule */,
+				8411BA6E2C2AA81C0056525F /* main */,
+				7555FF82242A565900829871 /* ContentView.swift */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		8411BA6E2C2AA81C0056525F /* main */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		8411BA6F2C2AA8250056525F /* schedule */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = schedule;
+			sourceTree = "<group>";
+		};
+		8411BA702C2AA82E0056525F /* account */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = account;
+			sourceTree = "<group>";
+		};
+		8411BA712C2AA83B0056525F /* auth */ = {
+			isa = PBXGroup;
+			children = (
+				8411BA742C2AA8730056525F /* otp */,
+				8411BA732C2AA84E0056525F /* register */,
+				8411BA722C2AA8470056525F /* login */,
+			);
+			path = auth;
+			sourceTree = "<group>";
+		};
+		8411BA722C2AA8470056525F /* login */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
+		8411BA732C2AA84E0056525F /* register */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = register;
+			sourceTree = "<group>";
+		};
+		8411BA742C2AA8730056525F /* otp */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = otp;
 			sourceTree = "<group>";
 		};
 		A02ECC643CBF60535BE5F7B7 /* Frameworks */ = {
@@ -90,7 +176,6 @@
 				5A79A93901E8B94B930B75EF /* Pods-iosApp.debug.xcconfig */,
 				FBE84A01C1ED6014A2417AFA /* Pods-iosApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -191,6 +276,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				8411BA6C2C2AA4CA0056525F /* ColorResource.swift in Sources */,
+				8411BA682C2AA1D70056525F /* ImageResource.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

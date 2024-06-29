@@ -34,15 +34,28 @@ kotlin {
         commonMain.dependencies {
             //put your multiplatform dependencies here
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.serialization.kotlinx.json)
-            implementation(libs.runtime)
             implementation(libs.kotlinx.datetime)
+
+            //ktor
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.ktor.client.content.negotiation)
+
+            //koin
             implementation(libs.koin.core)
+
+            //Coroutines
+            implementation(libs.kotlinx.coroutines.core)
+
+            // SQLDelight
+            implementation(libs.runtime)
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.android)
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.androidx.lifecycle.viewmodel.compose)
+
             implementation(libs.android.driver)
         }
         iosMain.dependencies {
