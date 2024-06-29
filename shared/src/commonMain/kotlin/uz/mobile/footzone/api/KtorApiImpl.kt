@@ -10,6 +10,8 @@ class KtorApiImpl() : KtorApi {
 
     val prodUrl = "https://footzone.uz/api/"
 
+
+
     override val client = HttpClient {
         install(ContentNegotiation) {
             json()
