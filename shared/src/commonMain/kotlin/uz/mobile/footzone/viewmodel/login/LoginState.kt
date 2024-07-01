@@ -1,6 +1,7 @@
 package uz.mobile.footzone.viewmodel.login
 
 import uz.mobile.footzone.common.Constants.EMPTY
+import uz.mobile.footzone.common.Constants.ZERO
 import uz.mobile.footzone.common.ErrorState
 
 data class LoginState(
@@ -9,6 +10,7 @@ data class LoginState(
     var mobile: String = EMPTY,
     var password: String = EMPTY,
     var rePassword: String = EMPTY,
+    var userType: Int = ZERO,
     val errorState: LoginErrorState = LoginErrorState(),
     val isLoginSuccessful: Boolean = false,
     val isLoading: Boolean = false,
@@ -19,6 +21,7 @@ data class LoginState(
         mobile = EMPTY,
         password = EMPTY,
         rePassword = EMPTY,
+        userType = ZERO,
         errorState = LoginErrorState(),
         isLoginSuccessful = false,
         isLoading = false,
@@ -32,8 +35,8 @@ data class LoginState(
  */
 data class LoginErrorState(
     val networkErrorState: ErrorState = ErrorState(),
-){
-    constructor():this(
+) {
+    constructor() : this(
         networkErrorState = ErrorState()
     )
 }
