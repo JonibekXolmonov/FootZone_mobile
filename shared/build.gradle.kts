@@ -50,11 +50,18 @@ kotlin {
 
             // SQLDelight
             implementation(libs.runtime)
+
+            //logger
+            implementation(libs.napier)
+
+            //settings
+            implementation(libs.russhwolf.multiplatform.settings)
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.android)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.androidx.security.crypto)
 
             implementation(libs.android.driver)
         }

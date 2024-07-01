@@ -14,6 +14,8 @@
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		8411BA682C2AA1D70056525F /* ImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411BA672C2AA1D70056525F /* ImageResource.swift */; };
 		8411BA6C2C2AA4CA0056525F /* ColorResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411BA6B2C2AA4CA0056525F /* ColorResource.swift */; };
+		84C43AE72C321D490081BD19 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C43AE62C321D490081BD19 /* MainScreen.swift */; };
+		84C43AE92C321D9D0081BD19 /* MainScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C43AE82C321D9D0081BD19 /* MainScreenState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8411BA672C2AA1D70056525F /* ImageResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResource.swift; sourceTree = "<group>"; };
 		8411BA6B2C2AA4CA0056525F /* ColorResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorResource.swift; sourceTree = "<group>"; };
+		84C43AE62C321D490081BD19 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		84C43AE82C321D9D0081BD19 /* MainScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenState.swift; sourceTree = "<group>"; };
 		FBE84A01C1ED6014A2417AFA /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +117,8 @@
 		8411BA6E2C2AA81C0056525F /* main */ = {
 			isa = PBXGroup;
 			children = (
+				84C43AE62C321D490081BD19 /* MainScreen.swift */,
+				84C43AE82C321D9D0081BD19 /* MainScreenState.swift */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -275,8 +281,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84C43AE92C321D9D0081BD19 /* MainScreenState.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				8411BA6C2C2AA4CA0056525F /* ColorResource.swift in Sources */,
+				84C43AE72C321D490081BD19 /* MainScreen.swift in Sources */,
 				8411BA682C2AA1D70056525F /* ImageResource.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);

@@ -23,13 +23,6 @@ struct ContentView: View {
     }
 }
 
-
-struct MainView: View {
-    var body: some View {
-        Text("Hello World!")
-    }
-}
-
 struct SplashScreenView: View {
     var body: some View {
         Color(mainBlue)
