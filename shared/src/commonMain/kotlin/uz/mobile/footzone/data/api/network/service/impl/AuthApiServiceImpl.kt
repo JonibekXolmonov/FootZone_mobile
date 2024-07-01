@@ -18,7 +18,7 @@ class AuthApiServiceImpl(
 
     private val httpClient = ktorApi.client
 
-     override suspend fun signUp(): Result<Responses.AccessToken> {
+     override suspend fun signUp(user: Requests.User): Result<Responses.AccessToken> {
         return httpClient.handle {
             this.post {
                 json()

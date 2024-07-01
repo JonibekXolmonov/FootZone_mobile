@@ -20,6 +20,12 @@ class AuthViewModel : CoroutineViewModel(), KoinComponent {
 
     fun onUiEvent(loginUiEvent: LoginUiEvent) {
         when (loginUiEvent) {
+            is LoginUiEvent.UserType -> {
+                _state.value = state.value.copy(
+                    userType = loginUiEvent.inputValue
+                )
+            }
+
             is LoginUiEvent.MobileChanged -> {
                 if (loginUiEvent.inputValue.length <= 9) {
                     _state.value = state.value.copy(
@@ -57,7 +63,6 @@ class AuthViewModel : CoroutineViewModel(), KoinComponent {
             }
 
             LoginUiEvent.Register -> {
-
                 val inputsValidated = validateInputs()
                 if (inputsValidated) {
                     _state.value = state.value.copy(isLoading = true)
@@ -143,7 +148,17 @@ class AuthViewModel : CoroutineViewModel(), KoinComponent {
 
     private fun signUp() {
         coroutineScope.launch {
-            autUseCase.signUp()
+
+            val response = autUseCase.signUp(
+                name = state.value.name,
+                surname = state.value.surname,
+                phone = state.value.mobile,
+                password = state.value.password,
+                rePassword = state.value.rePassword,
+                userType = state.value.userType,
+            )
+
+            response
                 .onSuccess {
                     _state.value = LoginState(
                         mobile = state.value.mobile,
