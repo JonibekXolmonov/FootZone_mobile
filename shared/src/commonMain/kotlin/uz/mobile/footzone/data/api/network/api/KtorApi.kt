@@ -1,4 +1,4 @@
-package uz.mobile.footzone.api
+package uz.mobile.footzone.data.api.network.api
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder

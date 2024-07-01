@@ -13,6 +13,12 @@ sqlDelight = "1.5.3"
 lifecycleViewmodelCompose = "2.8.2"
 material3 = "1.2.0"
 coil = "2.5.0"
+napierVersion = "2.6.1"
+multiplatform-settings = "0.9"
+android-crypto = "1.1.0-alpha06"
+biometric = "1.2.0-alpha05"
+
+
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -45,6 +51,14 @@ native-driver = { module = "com.squareup.sqldelight:native-driver", version.ref 
 runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqlDelight" }
 
 androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
+napier = { module = "io.github.aakira:napier", version.ref = "napierVersion" }
+
+russhwolf-multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatform-settings" }
+russhwolf-multiplatform-settings-test = { module = "com.russhwolf:multiplatform-settings-test", version.ref = "multiplatform-settings" }
+
+androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "android-crypto" }
+
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
