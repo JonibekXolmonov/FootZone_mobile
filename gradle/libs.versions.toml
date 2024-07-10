@@ -16,7 +16,8 @@ coil = "2.5.0"
 napierVersion = "2.6.1"
 multiplatform-settings = "0.9"
 android-crypto = "1.1.0-alpha06"
-biometric = "1.2.0-alpha05"
+voyager = "1.0.0"
+
 
 
 
@@ -57,6 +58,7 @@ russhwolf-multiplatform-settings = { module = "com.russhwolf:multiplatform-setti
 russhwolf-multiplatform-settings-test = { module = "com.russhwolf:multiplatform-settings-test", version.ref = "multiplatform-settings" }
 
 androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "android-crypto" }
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 
 
 

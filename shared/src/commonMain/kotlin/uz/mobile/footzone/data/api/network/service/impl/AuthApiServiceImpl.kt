@@ -9,7 +9,7 @@ import uz.mobile.footzone.data.api.network.response.Responses
 import uz.mobile.footzone.data.api.network.service.AuthApiService
 
 class AuthApiServiceImpl(
-    private val ktorApi: KtorApi,
+    private val ktorApi: KtorApi
 ) : AuthApiService, KtorApi by ktorApi {
 
     companion object {
@@ -24,13 +24,7 @@ class AuthApiServiceImpl(
                 json()
                 apiUrl(REGISTER)
                 setBody(
-                    Requests.User(
-                        fullName = "aadsfs",
-                        phone = "987865645",
-                        password = "1234567",
-                        rePassword = "1234567",
-                        userType = 0
-                    )
+                    user
                 )
             }
         }

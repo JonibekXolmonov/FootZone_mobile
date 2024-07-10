@@ -14,7 +14,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 withAnimation {
                     self.showSplash = true
                 }
@@ -25,7 +25,7 @@ struct ContentView: View {
 
 struct SplashScreenView: View {
     var body: some View {
-        Color(mainBlue)
+        mainBlue
             .ignoresSafeArea()
         Image(splash)
             .font(.largeTitle)

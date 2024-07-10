@@ -1,5 +1,7 @@
 package uz.mobile.footzone.usecase
 
+import uz.mobile.footzone.model.UserType
+
 interface AuthUseCase {
     suspend fun signUp(
         name: String,
@@ -7,6 +9,6 @@ interface AuthUseCase {
         phone: String,
         password: String,
         rePassword: String,
-        userType: Int = 0
+        userType: UserType
     ): Result<Boolean>
 }

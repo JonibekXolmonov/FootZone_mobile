@@ -6,7 +6,7 @@ data class ErrorState(
     var hasError: Boolean = false,
     val errorMessage: String = EMPTY,
 ){
-    constructor() :this(
+    constructor() : this(
         hasError = false,
         errorMessage = EMPTY
     )

@@ -14,6 +14,9 @@ import kotlinx.serialization.json.Json
 import uz.mobile.footzone.data.api.network.api.KtorApi
 import uz.mobile.footzone.data.settings.SettingsSource
 
+fun demoToken() = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMiIsImlhdCI6MTcyMDAyNDczMywiaWQiOiIxMiIsInBob25lIjoiOTk4OTMyNDc5Nzc4IiwiZnVsbE5hbWUiOiJKb25pYmVrIFhvbG1vbm92IFFhaHJhbW9uIG8nZydsaSIsImxvY2FsZSI6IkxBIiwiZXhwIjoxNzIwMTExMTMzfQ.aehKHXywPl--qb8S-CrHZnxbnpZzO2xkBXVH7qJiyObAHad-9RcLh25p5OQWkLVU3vbi_2ztxih9GK5fvJoVHg"
+
+
 class KtorApiImpl(
     private val settingsSource: SettingsSource
 ) : KtorApi {
@@ -33,7 +36,9 @@ class KtorApiImpl(
             }
         }
         install(ContentNegotiation) {
-            json()
+            json(Json {
+                ignoreUnknownKeys = true
+            })
         }
     }
 
@@ -43,7 +48,7 @@ class KtorApiImpl(
             encodedPath = path
             val token = settingsSource.getToken()
             if (!token.isNullOrBlank()) {
-                header("Authorization", "Bearer $token")
+                header("Authorization", "Bearer ${demoToken()}")
             }
         }
     }
