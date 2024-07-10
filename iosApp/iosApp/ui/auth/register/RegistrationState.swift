@@ -1,15 +1,15 @@
 //
-//  MainScreenState.swift
+//  RegistrationState.swift
 //  iosApp
 //
-//  Created by admin on 2024/07/01.
+//  Created by admin on 2024/07/05.
 //  Copyright © 2024 orgName. All rights reserved.
 //
 
 import Foundation
 import shared
 
-class MainScreenState : ObservableObject {
+class RegistrationState : ObservableObject {
  
     @Published var state: LoginState
     let viewModel: AuthViewModel
@@ -27,3 +27,4 @@ class MainScreenState : ObservableObject {
         viewModel.dispose()
     }
 }
+

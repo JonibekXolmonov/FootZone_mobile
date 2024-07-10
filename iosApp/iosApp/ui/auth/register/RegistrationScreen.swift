@@ -1,8 +1,8 @@
 //
-//  MainScreen.swift
+//  RegistrationScreen.swift
 //  iosApp
 //
-//  Created by admin on 2024/07/01.
+//  Created by admin on 2024/07/05.
 //  Copyright © 2024 orgName. All rights reserved.
 //
 
@@ -10,12 +10,12 @@ import Foundation
 import SwiftUI
 import shared
 
-struct MainView: View {
+struct RegistrationScreen: View {
     
-    @ObservedObject var state: MainScreenState
+    @ObservedObject var state: RegistrationState
     
     init() {
-        state = MainScreenState()
+        state = RegistrationState()
     }
     
     var body: some View {
@@ -54,23 +54,3 @@ struct MainView: View {
         }
     }
 }
-
-//func MainTextField(
-//    hasError:KotlinBoolean = false,
-//    errorMessage:String = "",
-//    value:Binding<String>,
-//    onValueChange:(String)->Void
-//) -> some View {
-//    @State var text: String = ""
-//    TextField("Username",
-//              text: $text,
-//              onEditingChanged: { (isEditing) in
-//        if !isEditing {
-//            // Text editing finished, do something with the final text
-//            print("You typed: \(value)")
-//        } else {
-//            // Text editing started, do something if needed
-//            print("You are typing...")
-//        }
-//    })
-//}

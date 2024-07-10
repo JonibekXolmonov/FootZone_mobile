@@ -3,6 +3,7 @@ package uz.mobile.footzone.viewmodel.login
 import uz.mobile.footzone.common.Constants.EMPTY
 import uz.mobile.footzone.common.Constants.ZERO
 import uz.mobile.footzone.common.ErrorState
+import uz.mobile.footzone.model.UserType
 
 data class LoginState(
     var name: String = EMPTY,
@@ -10,10 +11,11 @@ data class LoginState(
     var mobile: String = EMPTY,
     var password: String = EMPTY,
     var rePassword: String = EMPTY,
-    var userType: Int = ZERO,
+    var userType: UserType = UserType.USER,
+    var registerEnabled: Boolean = false,
     val errorState: LoginErrorState = LoginErrorState(),
     val isLoginSuccessful: Boolean = false,
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = false
 ) {
     constructor() : this(
         name = EMPTY,
@@ -21,7 +23,8 @@ data class LoginState(
         mobile = EMPTY,
         password = EMPTY,
         rePassword = EMPTY,
-        userType = ZERO,
+        userType = UserType.USER,
+        registerEnabled = false,
         errorState = LoginErrorState(),
         isLoginSuccessful = false,
         isLoading = false,

@@ -13,27 +13,27 @@ import uz.mobile.footzone.util.CoroutineViewModel
 
 class AuthViewModel : CoroutineViewModel(), KoinComponent {
 
-    private val autUseCase: AuthUseCase by inject()
+    private val authUseCase: AuthUseCase by inject()
 
     private val _state = MutableStateFlow(LoginState())
     val state: StateFlow<LoginState> = _state
 
     fun onUiEvent(loginUiEvent: LoginUiEvent) {
         when (loginUiEvent) {
-            is LoginUiEvent.UserType -> {
+            is LoginUiEvent.UserTypeChanged -> {
                 _state.value = state.value.copy(
-                    userType = loginUiEvent.inputValue
+                    userType = loginUiEvent.inputValue,
                 )
             }
 
             is LoginUiEvent.MobileChanged -> {
-                if (loginUiEvent.inputValue.length <= 9) {
+                if (loginUiEvent.inputValue.length <= 13) {
                     _state.value = state.value.copy(
                         mobile = loginUiEvent.inputValue
                     )
                 } else {
                     _state.value = state.value.copy(
-                        mobile = loginUiEvent.inputValue.take(9)
+                        mobile = loginUiEvent.inputValue.take(13)
                     )
                 }
             }
@@ -71,6 +71,9 @@ class AuthViewModel : CoroutineViewModel(), KoinComponent {
                 }
             }
         }
+
+        val inputsValid = inputsValid()
+        _state.value = state.value.copy(registerEnabled = inputsValid)
     }
 
     private fun validateInputs(): Boolean {
@@ -118,16 +121,6 @@ class AuthViewModel : CoroutineViewModel(), KoinComponent {
                 false
             }
 
-
-            rePassword.isEmpty() -> {
-                _state.value = state.value.copy(
-                    errorState = LoginErrorState(
-                        networkErrorState = rePasswordEmptyErrorState
-                    )
-                )
-                false
-            }
-
             rePassword != password -> {
                 _state.value = state.value.copy(
                     errorState = LoginErrorState(
@@ -146,10 +139,20 @@ class AuthViewModel : CoroutineViewModel(), KoinComponent {
         }
     }
 
+    private fun inputsValid(): Boolean {
+        val mobileString = state.value.mobile.trim()
+        val password = state.value.password.trim()
+        val rePassword = state.value.rePassword.trim()
+        val name = state.value.name.trim()
+        val surname = state.value.surname.trim()
+
+        return mobileString.isNotBlank() && password.isNotBlank() && rePassword.isNotBlank() && name.isNotBlank() && surname.isNotBlank()
+    }
+
     private fun signUp() {
         coroutineScope.launch {
 
-            val response = autUseCase.signUp(
+            val response = authUseCase.signUp(
                 name = state.value.name,
                 surname = state.value.surname,
                 phone = state.value.mobile,
@@ -177,6 +180,20 @@ class AuthViewModel : CoroutineViewModel(), KoinComponent {
                         )
                     )
                 }
+        }
+    }
+
+    fun clearViewModel() {
+        coroutineScope.launch {
+            _state.value = LoginState(
+                mobile = state.value.mobile,
+                name = state.value.name,
+                surname = state.value.surname,
+                password = state.value.password,
+                rePassword = state.value.rePassword,
+                registerEnabled = state.value.registerEnabled,
+                userType = state.value.userType
+            )
         }
     }
 
