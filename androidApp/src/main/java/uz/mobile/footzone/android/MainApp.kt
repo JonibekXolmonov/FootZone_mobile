@@ -1,7 +1,9 @@
 package uz.mobile.footzone.android
 
 import android.app.Application
-import org.koin.android.ext.koin.androidContext
+import android.content.Context
+import org.koin.dsl.module
+import uz.mobile.footzone.android.di.appModule
 import uz.mobile.footzone.di.initKoin
 import uz.mobile.footzone.platform.initLogger
 
@@ -12,8 +14,10 @@ class MainApp : Application() {
         super.onCreate()
 
         initLogger()
-        initKoin {
-            androidContext(this@MainApp)
-        }
+        initKoin(
+            module {
+                single<Context> { this@MainApp }
+            } + appModule
+        )
     }
 }

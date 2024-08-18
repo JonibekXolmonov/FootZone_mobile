@@ -40,16 +40,19 @@ dependencies {
     implementation(projects.shared)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.graphics)
-    implementation(libs.compose.navigation)
     implementation(libs.compose.foundation)
     implementation(libs.compose.coil)
     implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material)
     implementation(libs.compose.material3)
+    implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.voyager.navigator)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.bundles.koin)
 
+    implementation(libs.mapbox.android)
+    implementation(libs.maps.compose)
 
-    implementation(libs.koin.androidx.compose)
     debugImplementation(libs.compose.ui.tooling)
-
 }

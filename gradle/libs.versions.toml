@@ -1,41 +1,46 @@
 [versions]
 agp = "8.5.0"
+coreSplashscreen = "1.0.1"
 kotlin = "2.0.0"
 compose = "1.6.8"
-compose-nav = "2.7.7"
+mapsCompose = "11.6.0-rc.1"
 compose-material3 = "1.2.1"
+compose-material = "1.6.8"
 androidx-activityCompose = "1.9.0"
+constraintlayoutCompose = "1.0.1"
 coroutinesVersion = "1.8.0"
 dateTimeVersion = "0.5.0"
 koin = "3.5.3"
 ktor = "2.3.11"
-sqlDelight = "1.5.3"
-lifecycleViewmodelCompose = "2.8.2"
-material3 = "1.2.0"
+navigationCompose = "2.7.7"
+sqlDelight = "1.5.5"
+lifecycleViewmodelCompose = "2.8.4"
 coil = "2.5.0"
 napierVersion = "2.6.1"
 multiplatform-settings = "0.9"
 android-crypto = "1.1.0-alpha06"
-voyager = "1.0.0"
-
+koin-android = "3.5.3"
 
 
 
 [libraries]
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutCompose" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "compose" }
-compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "compose-nav" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
+compose-material = { module = "androidx.compose.material:material", version.ref = "compose-material" }
 android-driver = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqlDelight" }
-
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-android" }
 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "dateTimeVersion" }
@@ -58,7 +63,14 @@ russhwolf-multiplatform-settings = { module = "com.russhwolf:multiplatform-setti
 russhwolf-multiplatform-settings-test = { module = "com.russhwolf:multiplatform-settings-test", version.ref = "multiplatform-settings" }
 
 androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "android-crypto" }
-voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+
+
+mapbox-android = { module = "com.mapbox.maps:android", version.ref = "mapsCompose" }
+maps-compose = { module = "com.mapbox.extension:maps-compose", version.ref = "mapsCompose" }
+
+
+[bundles]
+koin = ["koin-android", "koin-androidx-compose", "koin-core"]
 
 
 
