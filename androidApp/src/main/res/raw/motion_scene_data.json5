@@ -1,0 +1,30 @@
+{
+  ConstraintSets: {
+    start: {
+      bottom_sheet_list: {
+        height: 'spread',
+        width: 'spread',
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        top: ['parent', 'bottom'],
+      },
+    },
+    end: {
+      bottom_sheet_list: {
+        height: 'spread',
+        width: 'spread',
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        bottom: ['parent', 'bottom'],
+        top: ['parent', 'top'],
+      },
+    }
+  },
+  Transitions: {
+    default: {
+      from: 'start',
+      to: 'end',
+//      pathMotionArc: 'startHorizontal'
+    }
+  }
+}

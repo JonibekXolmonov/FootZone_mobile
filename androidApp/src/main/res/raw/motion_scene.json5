@@ -1,0 +1,43 @@
+{
+  ConstraintSets: {
+    start: {
+      home_top_section: {
+        top: ['parent', 'top', 0],
+        start: ['parent', 'start', 0],
+        end: ['parent', 'end', 0],
+      },
+      user_locator : {
+        end: ['parent', 'end', 16],
+        bottom: ['bottom_sheet', 'top', 16],
+      },
+      bottom_sheet: {
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        top: ['parent', 'bottom'],
+      },
+    },
+    end: {
+      home_top_section: {
+        top: ['parent', 'top', 0],
+        start: ['parent', 'start', 0],
+        end: ['parent', 'end', 0],
+      },
+      user_locator : {
+        end: ['parent', 'end', 16],
+        bottom: ['bottom_sheet', 'top', 16]
+      },
+      bottom_sheet: {
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        bottom: ['parent', 'bottom'],
+      },
+    }
+  },
+  Transitions: {
+    default: {
+      from: 'start',
+      to: 'end',
+//      pathMotionArc: 'startHorizontal'
+    }
+  }
+}

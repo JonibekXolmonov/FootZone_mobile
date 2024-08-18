@@ -42,11 +42,25 @@ val md_theme_light_surfaceTint = Color(0xFF1976D2)
 
 //
 val neutral10 = Color(0xFFFFFFFF)
+val neutral15 = Color(0xFFFAFAFA)
+val neutral20 = Color(0xFFF5F5F5)
+val neutral30 = Color(0xFFEDEDED)
 val neutral40 = Color(0xFFE0E0E0)
+val neutral60 = Color(0xFF9E9E9E)
 val neutral80 = Color(0xFF616161)
 val neutral90 = Color(0xFF424242)
 val neutral100 = Color(0xFF0A0A0A)
+
 val blue600 = Color(0xFF0C64E6)
 val blue100 = Color(0xFFB4D2FE)
 val blue50 = Color(0xFFE7F1FF)
+
 val red600 = Color(0xFFC8303F)
+
+val green600 = Color(0xFF177B4C)
+
+val yellow500 = Color(0xFFFFC107)
+
+val shadow = Color(0x1F000000)
+val shadowStadiumItem = Color(0x1A000000)
+val shadowBottomSheet = Color(0x0F000000)

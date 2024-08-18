@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enter">Kirish</string>
+    <string name="forget_password">Parolingizni unutdingizmi?</string>
+    <string name="no_account">Akkauntingiz yo\'qmi?</string>
+    <string name="register">Ro’yxatdan o’tish</string>
+    <string name="enter_register">Ro’yxatdan o’ting</string>
+    <string name="mobile">Telefon raqam</string>
+    <string name="password">Parol</string>
+    <string name="loading">Loading</string>
+    <string name="have_account">Akkauntingiz bormi?</string>
+    <string name="enter_acccount">Kiring</string>
+    <string name="name">Ism</string>
+    <string name="surname">Familiya</string>
+    <string name="repassword">Parolni qaytaring</string>
+    <string name="user_type">Foydalanuvchi turi</string>
+    <string name="enter_registred_phone">Ro’yxatdan o’tgan telefon raqamingizni kiriting.</string>
+    <string name="send_otp">Kiritish</string>
+    <string name="enter_sent_otp">Telefon raqamingizga maxfiy kod\nSMS sifatida yuborildi. Shu kodni tering</string>
+    <string name="otp">Maxfiy kod</string>
+    <string name="set_new_password">Yangi parol o’rnatish</string>
+    <string name="resend_otp">Kodni qayta jo’natish</string>
+    <string name="set">O\'rnatish</string>
+    <string name="user_address">Sizning manzilingiz</string>
+    <string name="near_stadiums">Yaqin atrofdagi maydonlar</string>
+    <string name="marked_stadiums">Tanlangan maydonlar\n</string>
+    <string name="previously_booked_stadiums">Avval band qilingan maydonlar</string>
+    <string name="user_locator_id">user_locator</string>
+    <string name="bottom_sheet_id">bottom_sheet</string>
+    <string name="bottom_sheet_expansion">bottom_sheet_expansion</string>
+    <string name="search_field_placeholder">Maydon nomi</string>
+    <string name="my_stadiums">Mening maydonlarim</string>
+    <string name="book">Band qilish</string>
+    <string name="route">Mashrut</string>
+    <string name="now_open">Hozir ochiq</string>
+    <string name="well_rated">Yaxshi baholangan</string>
+    <string name="top_sheet_id">top_sheet</string>
+    <string name="bottom_sheet_stadiums_id">bottom_sheet_stadiums</string>
+    <string name="home_top_address">home_top_section</string>
+    <string name="bottom_sheet_list_id">bottom_sheet_list</string>
+    <string name="chooser_title">Yo\'lanishni ko\'rish uchun tanlang</string>
+    <string name="navigator_not_avialable">Sizda berilgan manzilga mashrutni ko\'rsatadigan ilova o\'rnatilmagan</string>
+</resources>
