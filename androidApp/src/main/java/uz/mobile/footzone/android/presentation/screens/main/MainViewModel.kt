@@ -1,19 +1,23 @@
 package uz.mobile.footzone.android.presentation.screens.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionState
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
+import uz.mobile.footzone.android.data.LocationClient
+import uz.mobile.footzone.common.Constants.LOCATION_UPDATE_INTERVAl
 import uz.mobile.footzone.common.ErrorState
 import uz.mobile.footzone.domain.usecase.StadiumUseCase
 import uz.mobile.footzone.presentation.main.BottomSheetAction
 import uz.mobile.footzone.presentation.main.Location
-import uz.mobile.footzone.presentation.main.MainErrorState
 import uz.mobile.footzone.presentation.main.MainScreenSideEffects
 import uz.mobile.footzone.presentation.main.MainScreenUiEvent
 import uz.mobile.footzone.presentation.main.MainState
@@ -26,14 +30,17 @@ import uz.mobile.footzone.utils.PreviouslyBookedFilter
 import uz.mobile.footzone.utils.StadiumFilter
 import uz.mobile.footzone.utils.WellRatedFilter
 import uz.mobile.footzone.utils.applyFilter
-import kotlin.math.log
 
+@OptIn(ExperimentalPermissionsApi::class)
 class MainViewModel(
     private val stadiumUseCase: StadiumUseCase,
-) : ViewModel(), KoinComponent {
+    private val locationClient: LocationClient,
+) : ViewModel() {
 
     private val _state = MutableStateFlow(MainState())
     val state: StateFlow<MainState> = _state
+
+    private lateinit var locationPermissionState: PermissionState
 
     private val _sideEffect = MutableSharedFlow<MainScreenSideEffects>()
     val sideEffect: SharedFlow<MainScreenSideEffects> = _sideEffect
@@ -140,7 +147,6 @@ class MainViewModel(
             }
 
             is MainScreenUiEvent.NavigateToStadium -> {
-                Log.d("TAG", "onUiEvent: NavigateToStadium")
                 val location = Location(uiEvent.stadium.longitude, uiEvent.stadium.latitude)
                 viewModelScope.launch {
                     _sideEffect.emit(MainScreenSideEffects.OpenNavigatorChoose(location))
@@ -149,6 +155,10 @@ class MainViewModel(
 
             is MainScreenUiEvent.SaveStadium -> {
 
+            }
+
+            MainScreenUiEvent.RequestLocationPermission -> {
+                locationPermissionState.launchPermissionRequest()
             }
         }
     }
@@ -200,6 +210,32 @@ class MainViewModel(
         }
     }
 
+    fun setPermissionState(permissionState: PermissionState) {
+        locationPermissionState = permissionState
+    }
+
+    fun onLocationPermissionResult(isGranted: Boolean = true) {
+        if (isGranted) {
+            locationClient.getLocationUpdates(LOCATION_UPDATE_INTERVAl)
+                .catch {
+                    if (it is LocationClient.LocationException) {
+                        viewModelScope.launch {
+                            _sideEffect.emit(MainScreenSideEffects.OpenGPSettings)
+                        }
+                    }
+                }
+                .onEach { location ->
+                    val latitude = location.latitude
+                    val longitude = location.longitude
+                    val userLocation = Location(longitude, latitude)
+                    val userCurrentLocation = _state.value.userLocation
+                    _state.value =
+                        _state.value.copy(userLocation = userCurrentLocation.copy(point = userLocation))
+                }
+                .launchIn(viewModelScope)
+        }
+    }
+
     init {
         _state.value = _state.value.copy(isLoading = true)
         viewModelScope.launch {
@@ -213,11 +249,9 @@ class MainViewModel(
                 .onFailure { throwable ->
                     _state.value = _state.value.copy(
                         isLoading = false,
-                        errorState = MainErrorState(
-                            errorState = ErrorState(
-                                hasError = true,
-                                errorMessage = throwable.message.orEmpty()
-                            )
+                        errorState = ErrorState(
+                            hasError = true,
+                            errorMessage = throwable.message.orEmpty()
                         )
                     )
                 }

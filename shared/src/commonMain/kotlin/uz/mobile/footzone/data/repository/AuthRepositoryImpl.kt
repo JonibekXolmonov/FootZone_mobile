@@ -17,4 +17,8 @@ class AuthRepositoryImpl(
             it
         }
     }
+
+    override suspend fun isAuthorised(): Boolean {
+        return settingsSource.getToken() != null
+    }
 }

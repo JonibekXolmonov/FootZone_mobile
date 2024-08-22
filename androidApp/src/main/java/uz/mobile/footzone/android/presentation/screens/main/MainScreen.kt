@@ -1,11 +1,19 @@
 @file:OptIn(
     ExperimentalMaterial3Api::class, ExperimentalMotionApi::class,
-    ExperimentalMaterial3Api::class
+    ExperimentalPermissionsApi::class,
 )
 
 package uz.mobile.footzone.android.presentation.screens.main
 
+import android.Manifest
 import android.content.Context
+import android.content.Intent
+import android.location.LocationManager
+import android.provider.Settings
+import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateColorAsState
@@ -53,6 +61,9 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 import com.mapbox.geojson.Point
 import com.mapbox.maps.Style
 import com.mapbox.maps.extension.compose.MapboxMap
@@ -62,7 +73,6 @@ import com.mapbox.maps.extension.compose.annotation.IconImage
 import com.mapbox.maps.extension.compose.annotation.generated.PointAnnotation
 import com.mapbox.maps.extension.compose.style.MapStyle
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
 import uz.mobile.footzone.android.R
 import uz.mobile.footzone.android.common.bitmapFromDrawableRes
 import uz.mobile.footzone.android.common.swipeUpDown
@@ -90,14 +100,25 @@ import uz.mobile.footzone.presentation.main.SheetState
 import uz.mobile.footzone.presentation.main.UserLocation
 
 @Composable
-fun MainScreen(
-    modifier: Modifier = Modifier
+fun MainScreenRoute(
+    modifier: Modifier = Modifier,
+    viewModel: MainViewModel = koinViewModel(),
+    context: Context = LocalContext.current,
+    onNavigateNotifications: () -> Unit,
+    onNavigateOwnerStadiums: () -> Unit,
 ) {
 
-    val viewModel: MainViewModel = koinViewModel()
-    val context: Context = LocalContext.current
-    val state by viewModel.state.collectAsState()
-    val sideEffects by viewModel.sideEffect.collectAsState(MainScreenSideEffects.Nothing)
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    val sideEffects by viewModel.sideEffect.collectAsStateWithLifecycle(MainScreenSideEffects.Nothing)
+
+    val locationPermissionState = rememberPermissionState(
+        permission = Manifest.permission.ACCESS_FINE_LOCATION,
+        onPermissionResult = viewModel::onLocationPermissionResult
+    )
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.setPermissionState(locationPermissionState)
+    }
 
     val mapViewportState = rememberMapViewportState {
         setCameraOptions {
@@ -106,15 +127,23 @@ fun MainScreen(
         }
     }
 
-    MainScreenContent(
-        modifier = Modifier.fillMaxSize(),
+    val resultLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+            Log.d("TAG", "MainScreenRoute: $result")
+            viewModel.onLocationPermissionResult()
+        }
+
+    MainScreen(
+        modifier = modifier.fillMaxSize(),
         state = state,
         context = context,
         mapViewportState = mapViewportState,
         navigateToNotifications = {
             viewModel.onUiEvent(MainScreenUiEvent.Notification)
         },
-        locateUser = {  },
+        locateUser = {
+            viewModel.onUiEvent(MainScreenUiEvent.RequestLocationPermission)
+        },
         onSheetStateChange = {
             viewModel.onUiEvent(MainScreenUiEvent.BottomSheetStateChange(it))
         },
@@ -154,8 +183,14 @@ fun MainScreen(
     )
 
     when (sideEffects) {
-        MainScreenSideEffects.NavigateToNotifications -> {}
-        MainScreenSideEffects.NavigateToOwnerStadiums -> {}
+        MainScreenSideEffects.NavigateToNotifications -> {
+            onNavigateNotifications()
+        }
+
+        MainScreenSideEffects.NavigateToOwnerStadiums -> {
+            onNavigateOwnerStadiums()
+        }
+
         is MainScreenSideEffects.OpenNavigatorChoose -> {
             LaunchedEffect(sideEffects) {
                 val location =
@@ -163,12 +198,21 @@ fun MainScreen(
                 context.shareStadiumLocationToNavigators(location)
             }
         }
+
+        MainScreenSideEffects.OpenGPSettings -> {
+            LaunchedEffect(sideEffects) {
+                resultLauncher.launch(
+                    Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                )
+            }
+        }
+
         MainScreenSideEffects.Nothing -> {}
     }
 }
 
 @Composable
-fun MainScreenContent(
+fun MainScreen(
     modifier: Modifier = Modifier,
     context: Context,
     state: MainState,

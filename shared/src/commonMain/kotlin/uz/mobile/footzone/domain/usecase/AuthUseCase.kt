@@ -17,5 +17,8 @@ interface AuthUseCase {
     suspend fun verifyOTP(phone: String, otp: String)
 
     suspend fun sendOTP(phone: String)
+
     suspend fun resetPassword()
+
+    suspend fun isAuthorised(): Boolean
 }

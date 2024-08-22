@@ -7,4 +7,5 @@ object Constants {
     const val USER = 0
     const val STADIUM_OWNER = 1
     const val COUNTRY_PHONE_CODE = "+998"
+    const val LOCATION_UPDATE_INTERVAl = 10_000L
 }

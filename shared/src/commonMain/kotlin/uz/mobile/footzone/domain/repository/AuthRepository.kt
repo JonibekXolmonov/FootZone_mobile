@@ -5,5 +5,6 @@ import uz.mobile.footzone.data.remote.network.response.Responses
 
 
 interface AuthRepository {
-    suspend fun signUp(user: Requests.User):Result<Responses.AccessToken>
+    suspend fun signUp(user: Requests.User): Result<Responses.AccessToken>
+    suspend fun isAuthorised(): Boolean
 }
