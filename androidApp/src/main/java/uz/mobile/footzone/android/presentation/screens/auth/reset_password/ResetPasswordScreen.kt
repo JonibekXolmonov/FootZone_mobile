@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,12 +16,12 @@ import uz.mobile.footzone.android.R
 import uz.mobile.footzone.android.presentation.components.AppPrimaryButton
 import uz.mobile.footzone.android.presentation.components.AppTopBar
 import uz.mobile.footzone.android.presentation.screens.auth.register.RegisterInputField
-import uz.mobile.footzone.presentation.auth.register.passwordEmptyErrorState
-import uz.mobile.footzone.presentation.auth.register.passwordNotMatchErrorState
 import uz.mobile.footzone.android.theme.MyApplicationTheme
 import uz.mobile.footzone.presentation.auth.password.PasswordSideEffects
 import uz.mobile.footzone.presentation.auth.password.PasswordState
 import uz.mobile.footzone.presentation.auth.password.PasswordUiEvents
+import uz.mobile.footzone.presentation.auth.register.passwordEmptyErrorState
+import uz.mobile.footzone.presentation.auth.register.passwordNotMatchErrorState
 
 @Composable
 fun ResetPasswordRoute(

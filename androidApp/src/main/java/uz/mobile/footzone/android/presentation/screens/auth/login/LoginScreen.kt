@@ -13,7 +13,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,8 +26,6 @@ import uz.mobile.footzone.android.presentation.components.AppPrimaryButton
 import uz.mobile.footzone.android.presentation.components.AppTopBar
 import uz.mobile.footzone.android.presentation.screens.auth.register.PhoneInput
 import uz.mobile.footzone.android.presentation.screens.auth.register.RegisterInputField
-import uz.mobile.footzone.presentation.auth.register.mobileEmptyErrorState
-import uz.mobile.footzone.presentation.auth.register.passwordEmptyErrorState
 import uz.mobile.footzone.android.theme.MyApplicationTheme
 import uz.mobile.footzone.android.theme.blue600
 import uz.mobile.footzone.android.theme.neutral40
@@ -36,6 +33,8 @@ import uz.mobile.footzone.android.theme.neutral90
 import uz.mobile.footzone.presentation.auth.login.LoginSideEffect
 import uz.mobile.footzone.presentation.auth.login.LoginState
 import uz.mobile.footzone.presentation.auth.login.LoginUiEvent
+import uz.mobile.footzone.presentation.auth.register.mobileEmptyErrorState
+import uz.mobile.footzone.presentation.auth.register.passwordEmptyErrorState
 
 @Composable
 fun LoginRoute(

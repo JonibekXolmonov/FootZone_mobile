@@ -1,11 +1,8 @@
 package uz.mobile.footzone.android.common
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
-import android.content.ContextWrapper
 import android.content.pm.PackageManager
-import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 
 fun Context.hasLocationPermission(): Boolean {

@@ -1,6 +1,5 @@
 package uz.mobile.footzone.domain.usecase.impl
 
-import kotlinx.coroutines.flow.Flow
 import uz.mobile.footzone.common.Constants.STADIUM_OWNER
 import uz.mobile.footzone.common.Constants.USER
 import uz.mobile.footzone.data.remote.network.request.Requests

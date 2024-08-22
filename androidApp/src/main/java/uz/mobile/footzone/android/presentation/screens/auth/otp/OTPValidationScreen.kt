@@ -11,8 +11,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,7 +23,6 @@ import org.koin.androidx.compose.koinViewModel
 import uz.mobile.footzone.android.R
 import uz.mobile.footzone.android.presentation.components.AppPrimaryButton
 import uz.mobile.footzone.android.presentation.components.AppTopBar
-import uz.mobile.footzone.presentation.auth.register.OTPErrorState
 import uz.mobile.footzone.android.presentation.screens.auth.register.RegisterInputField
 import uz.mobile.footzone.android.theme.MyApplicationTheme
 import uz.mobile.footzone.android.theme.blue600
@@ -33,6 +30,7 @@ import uz.mobile.footzone.android.theme.neutral90
 import uz.mobile.footzone.presentation.auth.otp.OTPSideEffects
 import uz.mobile.footzone.presentation.auth.otp.OTPState
 import uz.mobile.footzone.presentation.auth.otp.OTPUiEvents
+import uz.mobile.footzone.presentation.auth.register.OTPErrorState
 
 @Composable
 fun OTPValidationRoute(
