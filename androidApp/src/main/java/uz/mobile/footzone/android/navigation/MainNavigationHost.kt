@@ -29,7 +29,8 @@ fun MainNavigationHost(
 
         mainScreen(
             onNavigateNotifications = {},
-            onNavigateOwnerStadiums = {}
+            onNavigateOwnerStadiums = {},
+            onNavigateToAuth = navController::navigateToLogin
         )
 
         scheduleScreen()

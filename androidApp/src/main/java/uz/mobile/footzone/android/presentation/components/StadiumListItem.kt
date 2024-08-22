@@ -34,7 +34,7 @@ import uz.mobile.footzone.android.theme.neutral10
 import uz.mobile.footzone.android.theme.neutral100
 import uz.mobile.footzone.android.theme.neutral60
 import uz.mobile.footzone.android.theme.neutral80
-import uz.mobile.footzone.android.theme.shadowStadiumItem
+import uz.mobile.footzone.android.theme.shadow10
 import uz.mobile.footzone.domain.model.StadiumUiModel
 
 @Composable
@@ -185,7 +185,7 @@ fun StadiumListItemPr(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .clip(MaterialTheme.shapes.medium)
                 .blurredShadow(
-                    color = shadowStadiumItem,
+                    color = shadow10,
                     shadowBlurRadius = 8.dp,
                     offsetY = 4.dp
                 ),

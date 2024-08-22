@@ -78,14 +78,15 @@ import uz.mobile.footzone.android.presentation.components.StadiumListItem
 import uz.mobile.footzone.android.presentation.screens.app_sheets.HomeScreenActionBottomSheet
 import uz.mobile.footzone.android.presentation.screens.app_sheets.MainScreenTopSheet
 import uz.mobile.footzone.android.presentation.screens.app_sheets.StadiumListBottomSheet
+import uz.mobile.footzone.android.presentation.screens.dialogs.RegisterAlert
 import uz.mobile.footzone.android.presentation.utils.shareStadiumLocationToNavigators
 import uz.mobile.footzone.android.theme.neutral100
 import uz.mobile.footzone.android.theme.neutral15
 import uz.mobile.footzone.android.theme.neutral40
 import uz.mobile.footzone.android.theme.neutral80
 import uz.mobile.footzone.android.theme.neutral90
-import uz.mobile.footzone.android.theme.shadowBottomSheet
-import uz.mobile.footzone.android.theme.shadowStadiumItem
+import uz.mobile.footzone.android.theme.shadow10
+import uz.mobile.footzone.android.theme.shadow6
 import uz.mobile.footzone.domain.model.StadiumUiModel
 import uz.mobile.footzone.domain.model.UserType
 import uz.mobile.footzone.presentation.main.BottomSheetAction
@@ -101,8 +102,9 @@ fun MainScreenRoute(
     modifier: Modifier = Modifier,
     viewModel: MainViewModel = koinViewModel(),
     context: Context = LocalContext.current,
-    onNavigateNotifications: () -> Unit,
-    onNavigateOwnerStadiums: () -> Unit,
+    onNavigateToNotifications: () -> Unit,
+    onNavigateToOwnerStadiums: () -> Unit,
+    onNavigateToAuth: () -> Unit
 ) {
 
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -181,11 +183,11 @@ fun MainScreenRoute(
 
     when (sideEffects) {
         MainScreenSideEffects.NavigateToNotifications -> {
-            onNavigateNotifications()
+            onNavigateToNotifications()
         }
 
         MainScreenSideEffects.NavigateToOwnerStadiums -> {
-            onNavigateOwnerStadiums()
+            onNavigateToOwnerStadiums()
         }
 
         is MainScreenSideEffects.OpenNavigatorChoose -> {
@@ -202,6 +204,15 @@ fun MainScreenRoute(
                     Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                 )
             }
+        }
+
+        MainScreenSideEffects.UnAuthorisedUser -> {
+            RegisterAlert(
+                onDismissRequest = {
+                    viewModel.onUiEvent(MainScreenUiEvent.DismissDialog)
+                },
+                onEnterAccountClick = onNavigateToAuth
+            )
         }
 
         MainScreenSideEffects.Nothing -> {}
@@ -391,12 +402,12 @@ fun StadiumDataDisplay(
     )
 
     val shadow by animateColorAsState(
-        targetValue = if (sheetState == SheetState.FullExpanded) Color.White else shadowBottomSheet,
+        targetValue = if (sheetState == SheetState.FullExpanded) Color.White else shadow6,
         label = "sheet_shadow_color"
     )
 
     val shadowTop by animateColorAsState(
-        targetValue = if (sheetState == SheetState.FullExpanded) Color.White else shadowStadiumItem,
+        targetValue = if (sheetState == SheetState.FullExpanded) Color.White else shadow10,
         label = "sheet_shadow_color"
     )
 

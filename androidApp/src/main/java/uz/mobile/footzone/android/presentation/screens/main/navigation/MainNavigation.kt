@@ -13,14 +13,16 @@ fun NavController.navigateToMain(navOptions: NavOptions? = null) = navigate(MAIN
 
 fun NavGraphBuilder.mainScreen(
     onNavigateNotifications: () -> Unit,
-    onNavigateOwnerStadiums: () -> Unit
+    onNavigateOwnerStadiums: () -> Unit,
+    onNavigateToAuth: () -> Unit
 ) {
     composable(
         route = MAIN_ROUTE
     ) {
         MainScreenRoute(
-            onNavigateNotifications = onNavigateNotifications,
-            onNavigateOwnerStadiums = onNavigateOwnerStadiums
+            onNavigateToNotifications = onNavigateNotifications,
+            onNavigateToOwnerStadiums = onNavigateOwnerStadiums,
+            onNavigateToAuth = onNavigateToAuth
         )
     }
 }

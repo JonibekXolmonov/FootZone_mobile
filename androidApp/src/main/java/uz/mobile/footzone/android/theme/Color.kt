@@ -61,6 +61,6 @@ val green600 = Color(0xFF177B4C)
 
 val yellow500 = Color(0xFFFFC107)
 
-val shadow = Color(0x1F000000)
-val shadowStadiumItem = Color(0x1A000000)
-val shadowBottomSheet = Color(0x0F000000)
+val shadow12 = Color(0x1F000000) //shadow
+val shadow10 = Color(0x1A000000) //StadiumItem
+val shadow6 = Color(0x0F000000)  //bottomSheet

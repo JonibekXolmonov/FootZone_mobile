@@ -37,7 +37,7 @@ import uz.mobile.footzone.android.theme.neutral10
 import uz.mobile.footzone.android.theme.neutral100
 import uz.mobile.footzone.android.theme.neutral40
 import uz.mobile.footzone.android.theme.neutral80
-import uz.mobile.footzone.android.theme.shadow
+import uz.mobile.footzone.android.theme.shadow12
 import uz.mobile.footzone.android.theme.yellow500
 
 @Composable
@@ -151,7 +151,7 @@ fun AppCircleButton(modifier: Modifier = Modifier, @DrawableRes icon: Int, onCli
         modifier = modifier
             .size(48.dp)
             .blurredShadow(
-                color = shadow,
+                color = shadow12,
                 shadowBlurRadius = 4.dp,
                 offsetY = 2.dp,
                 cornersRadius = 24.dp

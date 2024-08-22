@@ -20,14 +20,14 @@ import uz.mobile.footzone.android.presentation.components.StadiumListItem
 import uz.mobile.footzone.android.theme.MyApplicationTheme
 import uz.mobile.footzone.android.theme.neutral10
 import uz.mobile.footzone.android.theme.neutral20
-import uz.mobile.footzone.android.theme.shadowBottomSheet
+import uz.mobile.footzone.android.theme.shadow6
 import uz.mobile.footzone.domain.model.StadiumUiModel
 
 @Composable
 fun StadiumListBottomSheet(
     modifier: Modifier = Modifier,
     cornerRadius: Dp = 16.dp,
-    shadowColor: Color = shadowBottomSheet,
+    shadowColor: Color = shadow6,
     stadiums: List<StadiumUiModel>,
     onAddStadiumBookmark: (StadiumUiModel) -> Unit,
     onBookStadium: (StadiumUiModel) -> Unit,

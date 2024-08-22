@@ -1,6 +1,5 @@
 package uz.mobile.footzone.android.presentation.screens.app_sheets
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,14 +31,14 @@ import uz.mobile.footzone.android.theme.neutral10
 import uz.mobile.footzone.android.theme.neutral100
 import uz.mobile.footzone.android.theme.neutral80
 import uz.mobile.footzone.android.theme.neutral90
-import uz.mobile.footzone.android.theme.shadowBottomSheet
-import uz.mobile.footzone.android.theme.shadowStadiumItem
+import uz.mobile.footzone.android.theme.shadow6
+import uz.mobile.footzone.android.theme.shadow10
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreenTopSheet(
     modifier: Modifier = Modifier,
-    shadowColor: Color = shadowStadiumItem,
+    shadowColor: Color = shadow10,
     currentlyOpenFilterActive: Boolean,
     wellRatedFilterActive: Boolean,
     onBack: () -> Unit,
@@ -114,7 +113,7 @@ fun MainScreenTopSheetPr(modifier: Modifier = Modifier) {
         MainScreenTopSheet(
             modifier = Modifier.fillMaxWidth(),
             onBack = {},
-            shadowColor = shadowStadiumItem,
+            shadowColor = shadow10,
             onWellRatedSelected = {},
             onCurrentlyOpenSelected = {},
             wellRatedFilterActive = false,
