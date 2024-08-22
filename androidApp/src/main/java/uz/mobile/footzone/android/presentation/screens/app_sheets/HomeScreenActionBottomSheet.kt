@@ -21,7 +21,7 @@ import uz.mobile.footzone.android.presentation.screens.main.ActionContainer
 import uz.mobile.footzone.presentation.main.BottomSheetAction
 import uz.mobile.footzone.android.presentation.screens.main.SearchInputField
 import uz.mobile.footzone.android.theme.neutral10
-import uz.mobile.footzone.android.theme.shadowBottomSheet
+import uz.mobile.footzone.android.theme.shadow6
 
 @Composable
 fun HomeScreenActionBottomSheet(
@@ -36,7 +36,7 @@ fun HomeScreenActionBottomSheet(
     Column(
         modifier = modifier
             .blurredShadow(
-                color = shadowBottomSheet,
+                color = shadow6,
                 shadowBlurRadius = 4.dp,
                 offsetY = (-2).dp
             )

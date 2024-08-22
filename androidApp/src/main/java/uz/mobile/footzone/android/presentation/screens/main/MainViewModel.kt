@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import uz.mobile.footzone.android.data.LocationClient
 import uz.mobile.footzone.common.Constants.LOCATION_UPDATE_INTERVAl
 import uz.mobile.footzone.common.ErrorState
+import uz.mobile.footzone.domain.model.UserType
 import uz.mobile.footzone.domain.usecase.StadiumUseCase
 import uz.mobile.footzone.presentation.main.BottomSheetAction
 import uz.mobile.footzone.presentation.main.Location
@@ -77,25 +78,31 @@ class MainViewModel(
                     }
 
                     BottomSheetAction.SavedStadiums -> {
-                        hideActionBottomSheet()
+                        isAuthorisedUser {
+                            hideActionBottomSheet()
 
-                        toggleFilter(BookmarkSavedFilter())
+                            toggleFilter(BookmarkSavedFilter())
 
-                        openListBottomSheet()
+                            openListBottomSheet()
+                        }
                     }
 
                     BottomSheetAction.PreviouslyBookedStadiums -> {
-                        hideActionBottomSheet()
+                        isAuthorisedUser {
+                            hideActionBottomSheet()
 
-                        toggleFilter(PreviouslyBookedFilter())
+                            toggleFilter(PreviouslyBookedFilter())
 
-                        openListBottomSheet()
+                            openListBottomSheet()
+                        }
                     }
 
                     BottomSheetAction.MyStadiums -> {
-                        hideActionBottomSheet()
+                        isAuthorisedUser {
+                            hideActionBottomSheet()
 
-                        openListBottomSheet()
+                            openListBottomSheet()
+                        }
                     }
                 }
             }
@@ -143,7 +150,9 @@ class MainViewModel(
             }
 
             is MainScreenUiEvent.BookStadium -> {
+                isAuthorisedUser {
 
+                }
             }
 
             is MainScreenUiEvent.NavigateToStadium -> {
@@ -154,11 +163,19 @@ class MainViewModel(
             }
 
             is MainScreenUiEvent.SaveStadium -> {
+                isAuthorisedUser {
 
+                }
             }
 
             MainScreenUiEvent.RequestLocationPermission -> {
                 locationPermissionState.launchPermissionRequest()
+            }
+
+            MainScreenUiEvent.DismissDialog -> {
+                viewModelScope.launch {
+                    _sideEffect.emit(MainScreenSideEffects.Nothing)
+                }
             }
         }
     }
@@ -233,6 +250,16 @@ class MainViewModel(
                         _state.value.copy(userLocation = userCurrentLocation.copy(point = userLocation))
                 }
                 .launchIn(viewModelScope)
+        }
+    }
+
+    private fun isAuthorisedUser(onAuthoriseUser: () -> Unit) {
+        if (_state.value.userType != UserType.UNAUTHORIZED)
+            onAuthoriseUser()
+        else {
+            viewModelScope.launch {
+                _sideEffect.emit(MainScreenSideEffects.UnAuthorisedUser)
+            }
         }
     }
 
