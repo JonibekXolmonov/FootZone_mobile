@@ -13,21 +13,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 import uz.mobile.footzone.android.R
 import uz.mobile.footzone.android.presentation.components.AppPrimaryButton
 import uz.mobile.footzone.android.presentation.components.AppTopBar
 import uz.mobile.footzone.android.presentation.screens.auth.register.PhoneInput
 import uz.mobile.footzone.android.presentation.screens.auth.register.RegisterInputField
-import uz.mobile.footzone.presentation.auth.register.mobileEmptyErrorState
-import uz.mobile.footzone.presentation.auth.register.passwordEmptyErrorState
 import uz.mobile.footzone.android.theme.MyApplicationTheme
 import uz.mobile.footzone.android.theme.blue600
 import uz.mobile.footzone.android.theme.neutral40
@@ -35,16 +33,25 @@ import uz.mobile.footzone.android.theme.neutral90
 import uz.mobile.footzone.presentation.auth.login.LoginSideEffect
 import uz.mobile.footzone.presentation.auth.login.LoginState
 import uz.mobile.footzone.presentation.auth.login.LoginUiEvent
+import uz.mobile.footzone.presentation.auth.register.mobileEmptyErrorState
+import uz.mobile.footzone.presentation.auth.register.passwordEmptyErrorState
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginRoute(
+    modifier: Modifier = Modifier,
+    viewModel: LoginViewModel = koinViewModel(),
+    onBackPressed: () -> Unit,
+    onForgetPassword: () -> Unit,
+    onNavigateToRegister: () -> Unit,
+    onNavigateToResetPassword: () -> Unit,
+    onLoginSuccess: () -> Unit
+) {
 
-    val viewModel: LoginViewModel = koinViewModel()
-    val loginState by viewModel.state.collectAsState()
-    val sideEffect by viewModel.sideEffect.collectAsState(LoginSideEffect.Nothing)
+    val loginState by viewModel.state.collectAsStateWithLifecycle()
+    val sideEffect by viewModel.sideEffect.collectAsStateWithLifecycle(LoginSideEffect.Nothing)
 
-    LoginScreenContent(
-        modifier = Modifier.fillMaxSize(),
+    LoginScreen(
+        modifier = modifier.fillMaxSize(),
         loginState = loginState,
         onPasswordChanged = {
             viewModel.onUiEvent(
@@ -65,34 +72,33 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         navigateToResetPassword = {
             viewModel.onUiEvent(LoginUiEvent.ResetPassword)
         },
-        onBackPressed = {
-//            navigator.pop()
-        }
+        onBackPressed = onBackPressed
     )
 
     when (sideEffect) {
         LoginSideEffect.ForgetPassword -> {
-//            navigator.push(PasswordRecoverScreen())
+            onForgetPassword()
         }
 
         LoginSideEffect.LoginSuccess -> {
-//            navigator.push(MainScreen())
+            onLoginSuccess()
         }
 
         LoginSideEffect.NavigateToRegister -> {
-//            navigator.push(RegistrationScreen())
+            onNavigateToRegister()
+        }
+
+        LoginSideEffect.NavigateToResetPassword -> {
+            onNavigateToResetPassword()
         }
 
         LoginSideEffect.Nothing -> {}
-        LoginSideEffect.NavigateToResetPassword -> {
-//            navigator.push(PasswordRecoverScreen())
-        }
     }
 }
 
 
 @Composable
-fun LoginScreenContent(
+fun LoginScreen(
     modifier: Modifier = Modifier,
     loginState: LoginState,
     onMobileChanged: (String) -> Unit,
@@ -203,7 +209,7 @@ fun LoginInputs(
 fun LoginScreenContentPr(modifier: Modifier = Modifier) {
     MyApplicationTheme {
 
-        LoginScreenContent(
+        LoginScreen(
             modifier = modifier.fillMaxSize(),
             loginState = LoginState(),
             onMobileChanged = {}, {}, {}, {}, {}) {

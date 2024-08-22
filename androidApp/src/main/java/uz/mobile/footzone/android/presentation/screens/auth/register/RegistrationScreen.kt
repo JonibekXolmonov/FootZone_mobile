@@ -28,7 +28,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,6 +43,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 import uz.mobile.footzone.android.R
 import uz.mobile.footzone.android.presentation.components.AppPrimaryButton
@@ -68,16 +68,22 @@ import uz.mobile.footzone.presentation.auth.register.passwordNotMatchErrorState
 import uz.mobile.footzone.presentation.auth.register.surnameEmptyErrorState
 
 @Composable
-fun RegistrationScreen(modifier: Modifier = Modifier) {
+fun RegistrationRoute(
+    modifier: Modifier = Modifier,
+    viewModel: AuthViewModel = koinViewModel(),
+    onNavigateToLogin: () -> Unit,
+    onBackPressed: () -> Unit,
+    onRegisteredSuccessfully: () -> Unit,
 
-    val viewModel: AuthViewModel = koinViewModel()
-    val registerState by viewModel.state.collectAsState()
+) {
+
+    val registerState by viewModel.state.collectAsStateWithLifecycle()
 
     if (registerState.isRegisterSuccessful) {
-//        navigator.push(OTPValidationScreen(registerState.mobile))
+        onRegisteredSuccessfully()
     }
 
-    RegistrationScreenContent(
+    RegistrationScreen(
         registerState = registerState,
         onUserTypeChange = {
             viewModel.onUiEvent(RegisterUiEvent.UserTypeChanged(it))
@@ -100,17 +106,13 @@ fun RegistrationScreen(modifier: Modifier = Modifier) {
         onRegister = {
             viewModel.onUiEvent(RegisterUiEvent.Register)
         },
-        navigateToLogin = {
-//            navigator.pop()
-        },
-        onBackPressed = {
-//            navigator.pop()
-        }
+        navigateToLogin = onNavigateToLogin,
+        onBackPressed = onBackPressed
     )
 }
 
 @Composable
-fun RegistrationScreenContent(
+fun RegistrationScreen(
     registerState: RegisterState,
     onUserTypeChange: (UserType) -> Unit,
     onNameChanged: (String) -> Unit,
@@ -504,7 +506,7 @@ val userTypes = listOf(UserType.USER, UserType.STADIUM_OWNER)
 fun RegisterScreenContentPr(modifier: Modifier = Modifier) {
     MyApplicationTheme {
 
-        RegistrationScreenContent(
+        RegistrationScreen(
             registerState = RegisterState(),
             onUserTypeChange = {},
             onNameChanged = {},

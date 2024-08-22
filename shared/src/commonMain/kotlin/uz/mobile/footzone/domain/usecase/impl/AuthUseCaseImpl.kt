@@ -46,4 +46,8 @@ class AuthUseCaseImpl(
     override suspend fun resetPassword() {
 
     }
+
+    override suspend fun isAuthorised(): Boolean {
+        return authRepository.isAuthorised()
+    }
 }

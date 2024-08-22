@@ -4,34 +4,39 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 import uz.mobile.footzone.android.R
 import uz.mobile.footzone.android.presentation.components.AppPrimaryButton
 import uz.mobile.footzone.android.presentation.components.AppTopBar
 import uz.mobile.footzone.android.presentation.screens.auth.register.RegisterInputField
-import uz.mobile.footzone.presentation.auth.register.passwordEmptyErrorState
-import uz.mobile.footzone.presentation.auth.register.passwordNotMatchErrorState
 import uz.mobile.footzone.android.theme.MyApplicationTheme
 import uz.mobile.footzone.presentation.auth.password.PasswordSideEffects
 import uz.mobile.footzone.presentation.auth.password.PasswordState
 import uz.mobile.footzone.presentation.auth.password.PasswordUiEvents
+import uz.mobile.footzone.presentation.auth.register.passwordEmptyErrorState
+import uz.mobile.footzone.presentation.auth.register.passwordNotMatchErrorState
 
 @Composable
-fun ResetPasswordScreen(modifier: Modifier = Modifier) {
+fun ResetPasswordRoute(
+    modifier: Modifier = Modifier,
+    viewModel: PasswordViewModel = koinViewModel(),
+    onBackPressed: () -> Unit,
+    onNavigateToLogin: () -> Unit
+) {
 
-    val viewModel: PasswordViewModel = koinViewModel()
-    val state by viewModel.state.collectAsState()
-    val sideEffect by viewModel.sideEffect.collectAsState(PasswordSideEffects.Nothing)
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    val sideEffect by viewModel.sideEffect.collectAsStateWithLifecycle(PasswordSideEffects.Nothing)
 
 
-    ResetPasswordScreenContent(
+    ResetPasswordScreen(
+        modifier = modifier,
         state = state,
         onPasswordChanged = {
             viewModel.onUiEvent(PasswordUiEvents.PasswordChanged(it))
@@ -42,14 +47,12 @@ fun ResetPasswordScreen(modifier: Modifier = Modifier) {
         resetPassword = {
             viewModel.onUiEvent(PasswordUiEvents.Reset)
         },
-        onBackPressed = {
-//                navigator.pop()
-        }
+        onBackPressed = onBackPressed
     )
 
     when (sideEffect) {
         PasswordSideEffects.NavigateToLogin -> {
-//                navigator.popUntilRoot()
+            onNavigateToLogin()
         }
 
         PasswordSideEffects.Nothing -> {}
@@ -57,8 +60,8 @@ fun ResetPasswordScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ResetPasswordScreenContent(
-    modifier: Modifier = Modifier,
+fun ResetPasswordScreen(
+    modifier: Modifier,
     state: PasswordState,
     onPasswordChanged: (String) -> Unit,
     onRePasswordChanged: (String) -> Unit,
@@ -116,11 +119,13 @@ fun ResetPasswordScreenContent(
 @Composable
 fun ResetPasswordScreenContentPr(modifier: Modifier = Modifier) {
     MyApplicationTheme {
-        ResetPasswordScreenContent(
+        ResetPasswordScreen(
             state = PasswordState(),
             onPasswordChanged = {},
             onRePasswordChanged = {},
-            resetPassword = { }) {
+            resetPassword = { },
+            modifier = Modifier
+        ) {
 
         }
     }

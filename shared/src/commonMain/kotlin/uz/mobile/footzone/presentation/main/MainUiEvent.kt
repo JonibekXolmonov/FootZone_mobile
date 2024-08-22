@@ -25,11 +25,13 @@ sealed class MainScreenUiEvent {
 
     data object Notification : MainScreenUiEvent()
     data object OnBackPressed : MainScreenUiEvent()
+    data object RequestLocationPermission : MainScreenUiEvent()
 }
 
 sealed class MainScreenSideEffects {
     data object NavigateToNotifications : MainScreenSideEffects()
     data object NavigateToOwnerStadiums : MainScreenSideEffects()
     data class OpenNavigatorChoose(val stadiumLocation: Location) : MainScreenSideEffects()
+    data object OpenGPSettings : MainScreenSideEffects()
     data object Nothing : MainScreenSideEffects()
 }

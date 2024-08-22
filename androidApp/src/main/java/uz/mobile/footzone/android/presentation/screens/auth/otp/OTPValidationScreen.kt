@@ -11,8 +11,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,11 +18,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 import uz.mobile.footzone.android.R
 import uz.mobile.footzone.android.presentation.components.AppPrimaryButton
 import uz.mobile.footzone.android.presentation.components.AppTopBar
-import uz.mobile.footzone.presentation.auth.register.OTPErrorState
 import uz.mobile.footzone.android.presentation.screens.auth.register.RegisterInputField
 import uz.mobile.footzone.android.theme.MyApplicationTheme
 import uz.mobile.footzone.android.theme.blue600
@@ -32,20 +30,22 @@ import uz.mobile.footzone.android.theme.neutral90
 import uz.mobile.footzone.presentation.auth.otp.OTPSideEffects
 import uz.mobile.footzone.presentation.auth.otp.OTPState
 import uz.mobile.footzone.presentation.auth.otp.OTPUiEvents
+import uz.mobile.footzone.presentation.auth.register.OTPErrorState
 
 @Composable
-fun OTPValidationScreen(modifier: Modifier = Modifier, phone: String) {
+fun OTPValidationRoute(
+    modifier: Modifier = Modifier,
+    viewModel: OTPValidationViewModel = koinViewModel(),
+    onBackPressed: () -> Unit,
+    onNavigateToPasswordReset: () -> Unit,
+    onOtpVerified: () -> Unit
+) {
 
-    val viewModel: OTPValidationViewModel = koinViewModel()
-    val state by viewModel.state.collectAsState()
-    val sideEffect by viewModel.sideEffect.collectAsState(OTPSideEffects.Nothing)
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    val sideEffect by viewModel.sideEffect.collectAsStateWithLifecycle(OTPSideEffects.Nothing)
 
-    LaunchedEffect(phone) {
-        viewModel.onUiEvent(OTPUiEvents.MobileChanged(phone))
-    }
-
-    OTPValidationScreenContent(
-        modifier = Modifier.fillMaxSize(),
+    OTPValidationScreen(
+        modifier = modifier.fillMaxSize(),
         state = state,
         onVerifyOTP = {
             viewModel.onUiEvent(OTPUiEvents.VerifyOTP)
@@ -56,14 +56,12 @@ fun OTPValidationScreen(modifier: Modifier = Modifier, phone: String) {
         onResendOTP = {
             viewModel.onUiEvent(OTPUiEvents.ResendOTP)
         },
-        onBackPressed = {
-//            navigator.pop()
-        }
+        onBackPressed = onBackPressed
     )
 
     when (sideEffect) {
         OTPSideEffects.NavigateToPasswordReset -> {
-//            navigator.push(ResetPasswordScreen())
+            onNavigateToPasswordReset()
         }
 
         OTPSideEffects.Nothing -> {}
@@ -71,7 +69,7 @@ fun OTPValidationScreen(modifier: Modifier = Modifier, phone: String) {
 }
 
 @Composable
-fun OTPValidationScreenContent(
+fun OTPValidationScreen(
     modifier: Modifier,
     state: OTPState,
     onVerifyOTP: () -> Unit,
@@ -139,7 +137,7 @@ fun OTPValidationScreenContent(
 @Composable
 fun PasswordRecoverScreenContentPr(modifier: Modifier = Modifier) {
     MyApplicationTheme {
-        OTPValidationScreenContent(
+        OTPValidationScreen(
             modifier = Modifier.fillMaxSize(),
             state = OTPState(),
             onOTPChanged = {}, onVerifyOTP = {}, onBackPressed = {}, onResendOTP = {})

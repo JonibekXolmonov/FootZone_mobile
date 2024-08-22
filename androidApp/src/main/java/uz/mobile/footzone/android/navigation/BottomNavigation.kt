@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -27,6 +26,9 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import uz.mobile.footzone.android.R
+import uz.mobile.footzone.android.presentation.screens.account.navigation.ACCOUNT_ROUTE
+import uz.mobile.footzone.android.presentation.screens.main.navigation.MAIN_ROUTE
+import uz.mobile.footzone.android.presentation.screens.schedule.navigation.SCHEDULE_ROUTE
 import uz.mobile.footzone.android.theme.MyApplicationTheme
 import uz.mobile.footzone.android.theme.blue100
 import uz.mobile.footzone.android.theme.neutral10
@@ -45,7 +47,7 @@ fun BottomBar(
         elevation = 0.dp,
         modifier = modifier
             .background(neutral10)
-            .padding(bottom = 28.dp, top=12.dp)
+            .padding(bottom = 28.dp, top = 12.dp)
             .padding(),
     ) {
 
@@ -130,7 +132,7 @@ private fun BottomBarTabPr() {
 val bottomTabs = listOf(BottomNavItem.Main, BottomNavItem.Schedule, BottomNavItem.Profile)
 
 sealed class BottomNavItem(val route: String, @DrawableRes val icon: Int, val label: String) {
-    data object Main : BottomNavItem("home", R.drawable.stadium_icon, "Maydonlar")
-    data object Schedule : BottomNavItem("search", R.drawable.schedule, "Jadval")
-    data object Profile : BottomNavItem("profile", R.drawable.profile, "Akkaunt")
+    data object Main : BottomNavItem(MAIN_ROUTE, R.drawable.stadium_icon, "Maydonlar")
+    data object Schedule : BottomNavItem(SCHEDULE_ROUTE, R.drawable.schedule, "Jadval")
+    data object Profile : BottomNavItem(ACCOUNT_ROUTE, R.drawable.profile, "Akkaunt")
 }

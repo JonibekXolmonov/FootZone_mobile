@@ -47,9 +47,13 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.bundles.koin)
+
+    implementation(libs.play.services.location)
+    implementation(libs.accompanist.permissions)
 
     implementation(libs.mapbox.android)
     implementation(libs.maps.compose)

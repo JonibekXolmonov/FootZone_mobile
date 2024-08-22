@@ -7,34 +7,38 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 import uz.mobile.footzone.android.R
 import uz.mobile.footzone.android.presentation.components.AppPrimaryButton
 import uz.mobile.footzone.android.presentation.components.AppTopBar
 import uz.mobile.footzone.android.presentation.screens.auth.register.PhoneInput
-import uz.mobile.footzone.presentation.auth.register.mobileEmptyErrorState
 import uz.mobile.footzone.android.theme.MyApplicationTheme
 import uz.mobile.footzone.android.theme.neutral90
 import uz.mobile.footzone.presentation.auth.password.PasswordRecoverSideEffects
 import uz.mobile.footzone.presentation.auth.password.PasswordRecoverUiEvents
 import uz.mobile.footzone.presentation.auth.password.PasswordRecoveryState
+import uz.mobile.footzone.presentation.auth.register.mobileEmptyErrorState
 
 @Composable
-fun PasswordRecoverScreen(modifier: Modifier = Modifier) {
+fun PasswordRecoverRoute(
+    modifier: Modifier = Modifier,
+    viewModel: PasswordRecoverViewModel = koinViewModel(),
+    onBackPressed: () -> Unit,
+    onNavigateToOTPValidation: () -> Unit
+) {
 
-    val viewModel: PasswordRecoverViewModel = koinViewModel()
-    val state by viewModel.state.collectAsState()
-    val sideEffect by viewModel.sideEffect.collectAsState(PasswordRecoverSideEffects.Nothing)
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    val sideEffect by viewModel.sideEffect.collectAsStateWithLifecycle(PasswordRecoverSideEffects.Nothing)
 
-    PasswordRecoverScreenContent(
-        modifier = Modifier.fillMaxSize(),
+    PasswordRecoverScreen(
+        modifier = modifier.fillMaxSize(),
         state = state,
         onMobileChanged = {
             viewModel.onUiEvent(PasswordRecoverUiEvents.MobileChanged(it))
@@ -42,14 +46,12 @@ fun PasswordRecoverScreen(modifier: Modifier = Modifier) {
         onSendOTP = {
             viewModel.onUiEvent(PasswordRecoverUiEvents.SendOTP)
         },
-        onBackPressed = {
-//            navigator.pop()
-        }
+        onBackPressed = onBackPressed
     )
 
     when (sideEffect) {
         PasswordRecoverSideEffects.NavigateToOTPValidation -> {
-//            navigator.push(OTPValidationScreen(state.mobile))
+            onNavigateToOTPValidation()
         }
 
         PasswordRecoverSideEffects.Nothing -> {
@@ -59,7 +61,7 @@ fun PasswordRecoverScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun PasswordRecoverScreenContent(
+fun PasswordRecoverScreen(
     modifier: Modifier,
     state: PasswordRecoveryState,
     onSendOTP: () -> Unit,
@@ -112,10 +114,10 @@ fun PasswordRecoverScreenContent(
 @Composable
 fun PasswordRecoverScreenContentPr(modifier: Modifier = Modifier) {
     MyApplicationTheme {
-        PasswordRecoverScreenContent(
+        PasswordRecoverScreen(
             modifier = Modifier.fillMaxSize(),
             state = PasswordRecoveryState(),
-            onSendOTP = {  }, {}) {
+            onSendOTP = { }, {}) {
 
         }
     }

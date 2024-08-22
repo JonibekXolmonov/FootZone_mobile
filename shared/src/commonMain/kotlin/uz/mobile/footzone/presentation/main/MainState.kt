@@ -14,7 +14,7 @@ data class MainState(
     val userType: UserType = UserType.UNAUTHORIZED,
     val searchQuery: String = EMPTY,
     val userLocation: UserLocation = UserLocation(),
-    val errorState: MainErrorState = MainErrorState(),
+    val errorState: ErrorState = ErrorState(),
     val isLoading: Boolean = false,
     val currentlyOpenFilterActive: Boolean = false,
     val wellRatedFilterActive: Boolean = false,
@@ -28,7 +28,7 @@ data class MainState(
         userType = UserType.USER,
         searchQuery = EMPTY,
         userLocation = UserLocation(),
-        errorState = MainErrorState(),
+        errorState = ErrorState(),
         isLoading = false,
         currentlyOpenFilterActive = false,
         wellRatedFilterActive = false,
@@ -59,12 +59,4 @@ enum class BottomSheetAction {
     SavedStadiums,
     PreviouslyBookedStadiums,
     MyStadiums
-}
-
-data class MainErrorState(
-    val errorState: ErrorState = ErrorState(),
-) {
-    constructor() : this(
-        errorState = ErrorState()
-    )
 }
