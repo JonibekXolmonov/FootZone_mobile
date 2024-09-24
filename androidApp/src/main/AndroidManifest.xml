@@ -9,7 +9,6 @@
     <application
         android:name=".MainApp"
         android:allowBackup="false"
-        android:dataExtractionRules="@xml/data_extraction_rules"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
