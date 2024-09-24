@@ -15,10 +15,12 @@ import uz.mobile.footzone.android.presentation.screens.auth.password_recover.Pas
 import uz.mobile.footzone.android.presentation.screens.auth.register.AuthViewModel
 import uz.mobile.footzone.android.presentation.screens.auth.reset_password.PasswordViewModel
 import uz.mobile.footzone.android.presentation.screens.main.MainViewModel
+import uz.mobile.footzone.android.presentation.screens.schedule.ScheduleViewModel
 
 internal val appModule = module {
     // View Models
     viewModel { MainViewModel(get(), get()) }
+    viewModel { ScheduleViewModel(get()) }
     viewModel { AuthViewModel(get()) }
     viewModel { LoginViewModel(get()) }
     viewModel { PasswordRecoverViewModel(get()) }
