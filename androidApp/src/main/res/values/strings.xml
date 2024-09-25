@@ -42,4 +42,14 @@
     <string name="navigator_not_avialable">Sizda berilgan manzilga mashrutni ko\'rsatadigan ilova o\'rnatilmagan</string>
     <string name="enter_account_to_book">Maydon band qilish uchun akkauntingizga kiring</string>
     <string name="enter_account_title">Akkauntingizga kiring</string>
+    <string name="view_stadiums_table">Maydonlar jadvalini ko’rish uchun\nakkauntingizga kiring</string>
+    <string name="view_account">Akkauntingiz sozlamalarini ko’rish uchun\nakkauntingizga kiring</string>
+    <string name="settings">Sozlamalar</string>
+    <string name="notifications">Bildirishnomalar</string>
+    <string name="notification_settings">Bildirishnomalar sozlamalari</string>
+    <string name="language">Til</string>
+    <string name="uzbek">O’zbekcha</string>
+    <string name="about_application">Ilova haqida</string>
+    <string name="application_version">Ilova versiyasi</string>
+    <string name="logout">Chiqish</string>
 </resources>
