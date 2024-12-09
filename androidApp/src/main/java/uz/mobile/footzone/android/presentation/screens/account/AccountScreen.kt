@@ -356,9 +356,9 @@ fun UserImage(
             when {
                 state.account.image == null -> {
                     Icon(
-                        imageVector = ImageVector.vectorResource(id = R.drawable.user),
+                        imageVector = ImageVector.vectorResource(id = R.drawable.person),
                         contentDescription = null,
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier.size(40.dp)
                     )
                 }
                 state.account.isUrl -> {
@@ -391,7 +391,7 @@ fun UserImage(
             }
         }
         AppPrimaryBorderedButton(
-            leadingIcon = if (state.account.image != null) R.drawable.pen else R.drawable.add,
+            leadingIcon = if (state.account.image != null) R.drawable.edit else R.drawable.add,
             modifier = Modifier
                 .size(40.dp)
                 .align(Alignment.BottomEnd),
@@ -419,11 +419,11 @@ fun UserInfo(
             style = MaterialTheme.typography.headlineMedium.copy(color = neutral100)
         )
         AppPrimaryBorderedButton(
-            leadingIcon = R.drawable.pen,
+            leadingIcon = R.drawable.edit,
             borderColor = neutral10,
-            contentPaddingValues = PaddingValues(6.dp),
+            contentPaddingValues = PaddingValues(3.dp),
             modifier = Modifier
-                .size(28.dp),
+                .size(30.dp),
             onClick = onNavigateToEditName
         )
     }
@@ -439,7 +439,7 @@ fun UserInfo(
         Icon(
             imageVector = ImageVector.vectorResource(id = R.drawable.phone),
             contentDescription = null,
-            modifier = Modifier.size(18.dp)
+            modifier = Modifier.size(24.dp)
         )
         Text(
             text = state.account.number,
@@ -448,11 +448,11 @@ fun UserInfo(
         Spacer(modifier = Modifier.weight(1f))
 
         AppPrimaryBorderedButton(
-            leadingIcon = R.drawable.pen,
+            leadingIcon = R.drawable.edit,
             borderColor = neutral10,
-            contentPaddingValues = PaddingValues(6.dp),
+            contentPaddingValues = PaddingValues(3.dp),
             modifier = Modifier
-                .size(28.dp),
+                .size(30.dp),
             onClick = onNavigateToEditNumber
         )
     }
@@ -483,7 +483,7 @@ fun Setting(
         )
 
         SettingRow(
-            iconId = R.drawable.notification,
+            iconId = R.drawable.notifications,
             title = stringResource(R.string.notifications),
             subtitle = stringResource(R.string.notification_settings),
             onClick = onNavigateToNotifications
@@ -544,7 +544,8 @@ fun SettingRow(
     ) {
         Icon(
             imageVector = ImageVector.vectorResource(id = iconId),
-            contentDescription = null
+            contentDescription = null,
+            modifier = Modifier.size(24.dp)
         )
 
         Column(
