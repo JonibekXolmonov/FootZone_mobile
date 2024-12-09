@@ -35,7 +35,11 @@ fun MainNavigationHost(
 
         scheduleScreen()
 
-        accountScreen()
+        accountScreen(
+            onNavigateToAuth = navController::navigateToLogin,
+            onNavigateToNotifications = {},
+            onNavigateToLanguageChange = {}
+        )
 
         registerScreen(
             onBackPressed = navController::popBackStack,
