@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -52,8 +53,9 @@ fun UpcomingListItem(
                 modifier = Modifier.padding(top = 12.dp)
             ) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.calendar),
-                    contentDescription = null
+                    imageVector = ImageVector.vectorResource(id = R.drawable.today),
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp)
                 )
 
                 Text(
@@ -67,8 +69,9 @@ fun UpcomingListItem(
                 modifier = Modifier.padding(top = 12.dp)
             ) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.date),
-                    contentDescription = null
+                    imageVector = ImageVector.vectorResource(id = R.drawable.access_time),
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp)
                 )
 
                 Text(
@@ -82,8 +85,9 @@ fun UpcomingListItem(
                 modifier = Modifier.padding(top = 12.dp)
             ) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.price),
-                    contentDescription = null
+                    imageVector = ImageVector.vectorResource(id = R.drawable.money),
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp)
                 )
 
                 Text(

@@ -5,7 +5,7 @@ import uz.mobile.footzone.domain.model.Stadiums
 import uz.mobile.footzone.domain.model.UserType
 
 data class ScheduleState(
-    val userType: UserType = UserType.UNAUTHORIZED,
+    val userType: UserType = UserType.USER,
     val stadiums: Stadiums = emptyList(),
     val errorState: ErrorState = ErrorState(),
     val isLoading: Boolean = false,
