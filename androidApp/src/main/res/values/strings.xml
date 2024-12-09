@@ -42,6 +42,9 @@
     <string name="navigator_not_avialable">Sizda berilgan manzilga mashrutni ko\'rsatadigan ilova o\'rnatilmagan</string>
     <string name="enter_account_to_book">Maydon band qilish uchun akkauntingizga kiring</string>
     <string name="enter_account_title">Akkauntingizga kiring</string>
+    <string name="stadiums">Maydonlar</string>
+    <string name="played">O’ynaladi</string>
+    <string name="to_play">O’ynalgan</string>
     <string name="view_stadiums_table">Maydonlar jadvalini ko’rish uchun\nakkauntingizga kiring</string>
     <string name="view_account">Akkauntingiz sozlamalarini ko’rish uchun\nakkauntingizga kiring</string>
     <string name="settings">Sozlamalar</string>

@@ -19,6 +19,7 @@ import uz.mobile.footzone.android.presentation.screens.main.navigation.mainScree
 import uz.mobile.footzone.android.presentation.screens.main.navigation.navigateToMain
 import uz.mobile.footzone.android.presentation.screens.schedule.navigation.scheduleScreen
 
+
 @Composable
 fun MainNavigationHost(
     modifier: Modifier = Modifier,
@@ -33,7 +34,9 @@ fun MainNavigationHost(
             onNavigateToAuth = navController::navigateToLogin
         )
 
-        scheduleScreen()
+        scheduleScreen(
+            onNavigateToAuth = navController::navigateToLogin
+        )
 
         accountScreen(
             onNavigateToAuth = navController::navigateToLogin,
