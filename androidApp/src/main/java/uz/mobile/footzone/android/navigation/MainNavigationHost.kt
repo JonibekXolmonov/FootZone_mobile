@@ -38,7 +38,11 @@ fun MainNavigationHost(
             onNavigateToAuth = navController::navigateToLogin
         )
 
-        accountScreen()
+        accountScreen(
+            onNavigateToAuth = navController::navigateToLogin,
+            onNavigateToNotifications = {},
+            onNavigateToLanguageChange = {}
+        )
 
         registerScreen(
             onBackPressed = navController::popBackStack,
