@@ -52,7 +52,6 @@ import uz.mobile.footzone.android.theme.neutral80
 import uz.mobile.footzone.android.theme.neutral90
 import uz.mobile.footzone.domain.model.StadiumUiModel
 import uz.mobile.footzone.domain.model.UserType
-import uz.mobile.footzone.presentation.main.MainScreenSideEffects
 import uz.mobile.footzone.presentation.schedule.ScheduleScreenUiEvent
 import uz.mobile.footzone.presentation.schedule.ScheduleSideEffects
 import uz.mobile.footzone.presentation.schedule.ScheduleState
@@ -65,7 +64,7 @@ fun ScheduleRoute(
     onNavigateToAuth: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val sideEffects by viewModel.sideEffect.collectAsStateWithLifecycle(MainScreenSideEffects.Nothing)
+    val sideEffects by viewModel.sideEffect.collectAsStateWithLifecycle(ScheduleSideEffects.Nothing)
 
     ScheduleScreen(
         modifier = modifier.fillMaxSize(),

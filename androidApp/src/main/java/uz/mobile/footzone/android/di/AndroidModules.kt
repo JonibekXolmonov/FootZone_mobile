@@ -16,13 +16,17 @@ import uz.mobile.footzone.android.presentation.screens.auth.password_recover.Pas
 import uz.mobile.footzone.android.presentation.screens.auth.register.AuthViewModel
 import uz.mobile.footzone.android.presentation.screens.auth.reset_password.PasswordViewModel
 import uz.mobile.footzone.android.presentation.screens.main.MainViewModel
+import uz.mobile.footzone.android.presentation.screens.order_time_interval.OrderTimeIntervalViewModel
 import uz.mobile.footzone.android.presentation.screens.schedule.ScheduleViewModel
+import uz.mobile.footzone.android.presentation.screens.stadium_detail.StadiumDetailViewModel
 
 internal val appModule = module {
     // View Models
     viewModel { MainViewModel(get(), get()) }
     viewModel { ScheduleViewModel(get()) }
     viewModel { AccountViewModel() }
+    viewModel { StadiumDetailViewModel() }
+    viewModel { OrderTimeIntervalViewModel() }
     viewModel { AuthViewModel(get()) }
     viewModel { LoginViewModel(get()) }
     viewModel { PasswordRecoverViewModel(get()) }

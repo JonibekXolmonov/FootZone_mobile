@@ -151,7 +151,9 @@ class MainViewModel(
 
             is MainScreenUiEvent.BookStadium -> {
                 isAuthorisedUser {
-
+                    viewModelScope.launch {
+                        _sideEffect.emit(MainScreenSideEffects.OpenStadiumDetail(uiEvent.stadium.id))
+                    }
                 }
             }
 

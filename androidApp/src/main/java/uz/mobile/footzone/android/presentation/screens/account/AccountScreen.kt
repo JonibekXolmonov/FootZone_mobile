@@ -69,7 +69,6 @@ import uz.mobile.footzone.domain.model.UserType
 import uz.mobile.footzone.presentation.account.AccountScreenUiEvent
 import uz.mobile.footzone.presentation.account.AccountSideEffects
 import uz.mobile.footzone.presentation.account.AccountState
-import uz.mobile.footzone.presentation.main.MainScreenSideEffects
 
 @Composable
 fun AccountRoute(
@@ -81,7 +80,7 @@ fun AccountRoute(
     onNavigateToLanguageChange: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val sideEffects by viewModel.sideEffect.collectAsStateWithLifecycle(MainScreenSideEffects.Nothing)
+    val sideEffects by viewModel.sideEffect.collectAsStateWithLifecycle(AccountSideEffects.Nothing)
 
     val resultLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->

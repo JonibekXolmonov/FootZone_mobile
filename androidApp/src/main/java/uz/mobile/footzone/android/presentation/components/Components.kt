@@ -4,15 +4,16 @@ package uz.mobile.footzone.android.presentation.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -21,15 +22,20 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import uz.mobile.footzone.android.R
@@ -37,8 +43,10 @@ import uz.mobile.footzone.android.common.blurredShadow
 import uz.mobile.footzone.android.theme.blue600
 import uz.mobile.footzone.android.theme.neutral10
 import uz.mobile.footzone.android.theme.neutral100
+import uz.mobile.footzone.android.theme.neutral30
 import uz.mobile.footzone.android.theme.neutral40
 import uz.mobile.footzone.android.theme.neutral80
+import uz.mobile.footzone.android.theme.neutral90
 import uz.mobile.footzone.android.theme.shadow12
 import uz.mobile.footzone.android.theme.yellow500
 
@@ -57,9 +65,8 @@ fun AppPrimaryButton(
         shape = shape,
         contentPadding = PaddingValues(
             vertical = 10.dp, horizontal = 24.dp
-        ),
-        colors = ButtonDefaults.buttonColors().copy(
-            containerColor = blue600,
+        ), colors = ButtonDefaults.buttonColors().copy(
+            containerColor = if (enabled) blue600 else neutral40,
             disabledContainerColor = neutral40,
             contentColor = neutral10,
             disabledContentColor = neutral80
@@ -202,4 +209,71 @@ fun StarRatingBar(
             )
         }
     }
+}
+
+@Composable
+fun TimePickerField(
+    modifier: Modifier,
+    hint: String,
+    value: String? = null,
+    icon: Int? = null,
+    clearIcon: Int? = null,
+    onClick: () -> Unit,
+    onClearTextField: (() -> Unit)? = null,
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    LaunchedEffect(interactionSource) {
+        interactionSource.interactions.collect { interaction ->
+            if (interaction is PressInteraction.Release) {
+                onClick()
+            }
+        }
+    }
+
+    OutlinedTextField(value = value ?: "",
+        textStyle = MaterialTheme.typography.bodyLarge.copy(color = neutral100),
+        onValueChange = {},
+        readOnly = true,
+        placeholder = {
+            if (value.isNullOrEmpty()) {
+                Text(
+                    text = hint, style = MaterialTheme.typography.bodyLarge.copy(color = neutral90)
+                )
+            }
+        },
+        modifier = modifier,
+        interactionSource = interactionSource,
+        trailingIcon = {
+            icon?.let {
+                IconButton(onClick = onClick) {
+                    Icon(
+                        painter = painterResource(id = it), contentDescription = null
+                    )
+                }
+            }
+
+            if (!value.isNullOrEmpty()) {
+                clearIcon?.let {
+                    onClearTextField?.let { it1 ->
+                        IconButton(onClick = it1) {
+                            Icon(
+                                painter = painterResource(id = it), contentDescription = null
+                            )
+                        }
+                    }
+                }
+            }
+        },
+        shape = RoundedCornerShape(4.dp),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = neutral30,
+            unfocusedBorderColor = neutral30,
+        ),
+        label = if (!value.isNullOrEmpty()) {
+            {
+                Text(
+                    text = hint, style = MaterialTheme.typography.bodySmall.copy(color = neutral90)
+                )
+            }
+        } else null)
 }

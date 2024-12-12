@@ -104,6 +104,7 @@ fun MainScreenRoute(
     context: Context = LocalContext.current,
     onNavigateToNotifications: () -> Unit,
     onNavigateToOwnerStadiums: () -> Unit,
+    onNavigateToStadiumDetail: (stadiumId: Int) -> Unit,
     onNavigateToAuth: () -> Unit
 ) {
 
@@ -213,6 +214,12 @@ fun MainScreenRoute(
                 },
                 onEnterAccountClick = onNavigateToAuth
             )
+        }
+
+        is MainScreenSideEffects.OpenStadiumDetail -> {
+            val stadiumId =
+                (sideEffects as MainScreenSideEffects.OpenStadiumDetail).stadiumId
+            onNavigateToStadiumDetail(stadiumId)
         }
 
         MainScreenSideEffects.Nothing -> {}
