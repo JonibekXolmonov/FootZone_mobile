@@ -55,4 +55,12 @@
     <string name="about_application">Ilova haqida</string>
     <string name="application_version">Ilova versiyasi</string>
     <string name="logout">Chiqish</string>
+    <string name="add_bookmark">Tanlanganlarga qo’shish</string>
+    <string name="share">Bo’lishish</string>
+    <string name="ratings_reviews">Baholar va sharhlar</string>
+    <string name="cancel">Bekor qilish</string>
+    <string name="select">Tanlash</string>
+    <string name="time_interval">Vaqt oralig’i</string>
+    <string name="from">.. dan</string>
+    <string name="until">... gacha</string>
 </resources>

@@ -1,5 +1,7 @@
 package uz.mobile.footzone.android.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -17,9 +19,14 @@ import uz.mobile.footzone.android.presentation.screens.auth.reset_password.navig
 import uz.mobile.footzone.android.presentation.screens.auth.reset_password.navigation.passwordResetScreen
 import uz.mobile.footzone.android.presentation.screens.main.navigation.mainScreen
 import uz.mobile.footzone.android.presentation.screens.main.navigation.navigateToMain
+import uz.mobile.footzone.android.presentation.screens.order_time_interval.navigation.navigateToOrderTimeInterval
+import uz.mobile.footzone.android.presentation.screens.order_time_interval.navigation.orderTimeIntervalScreen
 import uz.mobile.footzone.android.presentation.screens.schedule.navigation.scheduleScreen
+import uz.mobile.footzone.android.presentation.screens.stadium_detail.navigation.navigateToStadiumDetail
+import uz.mobile.footzone.android.presentation.screens.stadium_detail.navigation.stadiumDetailScreen
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainNavigationHost(
     modifier: Modifier = Modifier,
@@ -31,7 +38,21 @@ fun MainNavigationHost(
         mainScreen(
             onNavigateNotifications = {},
             onNavigateOwnerStadiums = {},
-            onNavigateToAuth = navController::navigateToLogin
+            onNavigateToAuth = navController::navigateToLogin,
+            onNavigateToStadiumDetail = { stadiumId ->
+                navController.navigateToStadiumDetail(stadiumId = stadiumId)
+            }
+        )
+
+        stadiumDetailScreen(
+            onBackPressed = {
+                navController.popBackStack(route = BottomNavItem.Main.route, inclusive = false)
+            },
+            onNavigateTimeInterval = navController::navigateToOrderTimeInterval
+        )
+
+        orderTimeIntervalScreen(
+            onBackPressed = navController::popBackStack,
         )
 
         scheduleScreen(

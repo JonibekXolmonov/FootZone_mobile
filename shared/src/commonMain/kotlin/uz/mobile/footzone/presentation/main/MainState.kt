@@ -11,7 +11,7 @@ data class MainState(
     val stadiums: Stadiums = emptyList(),
     val filteredStadiums: Stadiums = emptyList(),
     val selectedStadium: StadiumUiModel? = null,
-    val userType: UserType = UserType.UNAUTHORIZED,
+    val userType: UserType = UserType.USER,
     val searchQuery: String = EMPTY,
     val userLocation: UserLocation = UserLocation(),
     val errorState: ErrorState = ErrorState(),

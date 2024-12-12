@@ -18,7 +18,11 @@ val robotoFontFamily =  FontFamily(
 
 val Typography = Typography(
     displayMedium = TextStyle(
-
+        fontFamily = robotoFontFamily,
+        fontWeight = FontWeight.Medium,
+        color = neutral100,
+        fontSize = 45.sp,
+        lineHeight = 52.sp,
     ),
     headlineLarge = TextStyle(
         fontFamily = robotoFontFamily,

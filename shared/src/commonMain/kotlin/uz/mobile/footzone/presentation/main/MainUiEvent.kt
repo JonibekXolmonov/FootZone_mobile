@@ -36,4 +36,5 @@ sealed class MainScreenSideEffects {
     data object OpenGPSettings : MainScreenSideEffects()
     data object UnAuthorisedUser : MainScreenSideEffects()
     data object Nothing : MainScreenSideEffects()
+    data class OpenStadiumDetail(val stadiumId: Int) : MainScreenSideEffects()
 }
