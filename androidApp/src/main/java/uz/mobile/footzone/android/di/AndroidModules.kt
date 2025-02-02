@@ -19,6 +19,7 @@ import uz.mobile.footzone.android.presentation.screens.main.MainViewModel
 import uz.mobile.footzone.android.presentation.screens.order_time_interval.OrderTimeIntervalViewModel
 import uz.mobile.footzone.android.presentation.screens.schedule.ScheduleViewModel
 import uz.mobile.footzone.android.presentation.screens.stadium_detail.StadiumDetailViewModel
+import uz.mobile.footzone.android.presentation.screens.stadium_owner.StadiumOwnerViewModel
 
 internal val appModule = module {
     // View Models
@@ -27,6 +28,7 @@ internal val appModule = module {
     viewModel { AccountViewModel() }
     viewModel { StadiumDetailViewModel() }
     viewModel { OrderTimeIntervalViewModel() }
+    viewModel { StadiumOwnerViewModel() }
     viewModel { AuthViewModel(get()) }
     viewModel { LoginViewModel(get()) }
     viewModel { PasswordRecoverViewModel(get()) }

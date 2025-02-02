@@ -63,4 +63,5 @@
     <string name="time_interval">Vaqt oralig’i</string>
     <string name="from">.. dan</string>
     <string name="until">... gacha</string>
+    <string name="stadiums_not_available">Hozir sizda maydonlar mavjud emas.\nMaydon qo’shish uchun yuqoridagi\n“+” tugmasini bosing</string>
 </resources>

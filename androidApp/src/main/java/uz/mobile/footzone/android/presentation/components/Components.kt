@@ -132,6 +132,8 @@ fun AppPrimaryBorderedButton(
 fun AppTopBar(
     modifier: Modifier = Modifier,
     title: String,
+    actionIcon: Int? = null,
+    onActionPressed: (() -> Unit)? = null,
     onBack: () -> Unit
 ) {
     TopAppBar(
@@ -148,6 +150,16 @@ fun AppTopBar(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = null
                 )
+            }
+        },
+        actions = {
+            actionIcon?.let {
+                IconButton(onClick = { onActionPressed?.invoke() }) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(actionIcon),
+                        contentDescription = null
+                    )
+                }
             }
         }
     )

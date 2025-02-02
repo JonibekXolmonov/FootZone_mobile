@@ -13,6 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import uz.mobile.footzone.android.navigation.BottomBar
 import uz.mobile.footzone.android.navigation.BottomNavItem
 import uz.mobile.footzone.android.navigation.MainNavigationHost
+import uz.mobile.footzone.android.presentation.screens.stadium_owner.StadiumOwnerRoute
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -29,16 +30,20 @@ fun FootZoneApp(
 
     val showBottomBar = currentDestination?.destination?.route in screensWithBottomBar
 
-    Scaffold(
-        bottomBar = {
-            if (showBottomBar) {
-                BottomBar(navController = navController)
-            }
-        }
-    ) { innerPadding ->
-        MainNavigationHost(
-            modifier = Modifier.padding(bottom = innerPadding.calculateBottomPadding()),
-            navController = navController,
-        )
+//    Scaffold(
+//        bottomBar = {
+//            if (showBottomBar) {
+//                BottomBar(navController = navController)
+//            }
+//        }
+//    ) { innerPadding ->
+//        MainNavigationHost(
+//            modifier = Modifier.padding(bottom = innerPadding.calculateBottomPadding()),
+//            navController = navController,
+//        )
+//    }
+
+    StadiumOwnerRoute {
+
     }
 }
