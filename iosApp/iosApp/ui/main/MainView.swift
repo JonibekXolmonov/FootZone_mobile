@@ -23,16 +23,6 @@ struct MainView: View {
                 .tabItem{
                     Label("Contacted", systemImage: "checkmark.circle")
                 }
-            
-//            MainScreen()
-//                .tabItem{
-//                    Label("Uncontacted", systemImage: "questionmark.diamond")
-//                }
-//
-//            MainScreen()
-//                .tabItem{
-//                    Label("Me", systemImage: "person.crop.square")
-//                }
         }
         .background(Color.white.edgesIgnoringSafeArea(.bottom))
         .onAppear {
@@ -47,23 +37,3 @@ struct MainView: View {
         }
     }
 }
-
-//func MainTextField(
-//    hasError:KotlinBoolean = false,
-//    errorMessage:String = "",
-//    value:Binding<String>,
-//    onValueChange:(String)->Void
-//) -> some View {
-//    @State var text: String = ""
-//    TextField("Username",
-//              text: $text,
-//              onEditingChanged: { (isEditing) in
-//        if !isEditing {
-//            // Text editing finished, do something with the final text
-//            print("You typed: \(value)")
-//        } else {
-//            // Text editing started, do something if needed
-//            print("You are typing...")
-//        }
-//    })
-//}

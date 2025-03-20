@@ -19,11 +19,11 @@ class MainScreenState : NSObject, ObservableObject, CLLocationManagerDelegate {
     var lastKnownLocation: CLLocationCoordinate2D?
     var locationManager = CLLocationManager()
     
-    var viewModel: MainViewModel
+//    var viewModel: MainViewModel
     
     override init() {
         
-        self.viewModel = MainViewModel()
+//        self.viewModel = MainViewModel()
         self.state = MainState()
         self.markers = []
         

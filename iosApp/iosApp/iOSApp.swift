@@ -16,7 +16,7 @@ struct iOSApp: App {
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization
-        CommonModuleKt.doInitKoin()
+        CommonModuleKt.doInitKoin(additionalModules: [])
         return true
     }
 }
